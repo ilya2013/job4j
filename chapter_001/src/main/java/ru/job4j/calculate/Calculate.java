@@ -4,7 +4,7 @@ package ru.job4j.calculate;
  * Calculate task class
  *@author Ilya B 
  *@version $id$
- *@since 0.1
+ *@since 03.12.18
  */
 public class Calculate{
 	/**

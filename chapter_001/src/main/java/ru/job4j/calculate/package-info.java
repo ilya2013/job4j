@@ -3,6 +3,6 @@
 *
 * @author Ilya B ()
 * @version $Id$
-* @since 0.1
+* @since 03.12.18
 */
 package ru.job4j.calculate;
