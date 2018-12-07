@@ -1,5 +1,5 @@
 /**
- * Test calculate package
+ * Test calculate package.
  * @author Ilya B 
  * @version 1
  * @since 03.12.18
