@@ -7,7 +7,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Calculate task class test.
  * @author Ilya B 
- * @version 1
+ * @version 2
  * @since 06.12.18
  */
 public class CalculateTest {
