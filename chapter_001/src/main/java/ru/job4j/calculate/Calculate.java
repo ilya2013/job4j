@@ -7,20 +7,46 @@ package ru.job4j.calculate;
  * @since 03.12.18
  */
 public class Calculate {
+	double result;
 	/**
-	 * SOUT text 
-	 *@param args nothing now
+	 * Суммирование аргментов.
+	 *@param first первое число
+	 *@param second второе число
 	 */
-	public static void main(String[] args) {
-		System.out.println("Hello world.");
+	void add(double first, double second) {
+		this.result = first + second;
 	}
-	
 	/**
-	 *Mehod echo
-	 *@param name Your name
-	 *@return Echo plus your name
+	 * Вычитание первого аргумента из второго.
+	 *@param first первое число
+	 *@param second второе число
 	 */
-	public String echo(String name) {
-		return "Echo, echo, echo : " + name;
+	void subtract(double first, double second) {
+		this.result = first - second;
+	}
+
+	/**
+	 * Деление аргументов.
+	 *@param first первое число
+	 *@param second второе число
+	 */
+	void div(double first, double second) {
+		this.result = first / second;
+	}
+
+	/**
+	 * Умножение аргументов.
+	 *@param first первое число
+	 *@param second второе число
+	 */
+	void multiply(double first, double second) {
+		this.result = first * second;
+	}
+	/**
+	 * Возвращение результата
+	 *@return Возвращение результата вычисления
+	 */
+	public double getResult() {
+		return this.result;
 	}
 }

@@ -16,12 +16,45 @@ public class CalculateTest {
      */
 
     @Test
-    public void whenTakeNameThenEchoPlusName() {
-        String input = "Ilya B";
-        String expect = "Echo, echo, echo : Ilya B";
+    public void whenAddOnePlusOneThenTwo() {
+        double num1 = 1.0d;
+        double num2 = 1.0d;
+        double expect = 2.0d;
         Calculate calc = new Calculate();
-        String result = calc.echo(input);
+        calc.add(num1, num2);
+        double result = calc.getResult();
         assertThat(result, is(expect));
     }
 
+    @Test
+    public void whenSubstractTwoMinusOneThenOne() {
+        double num1 = 2.0d;
+        double num2 = 1.0d;
+        double expect = 1.0d;
+        Calculate calc = new Calculate();
+        calc.subtract(num1, num2);
+        double result = calc.getResult();
+        assertThat(result, is(expect));
+    }
+    @Test
+    public void whenDivTwoOnTwoThenOne() {
+        double num1 = 2.0d;
+        double num2 = 2.0d;
+        double expect = 1.0d;
+        Calculate calc = new Calculate();
+        calc.div(num1, num2);
+        double result = calc.getResult();
+        assertThat(result, is(expect));
+    }
+
+    @Test
+    public void whenMultiplyTwoOnOneThenTwo() {
+        double num1 = 2.0d;
+        double num2 = 1.0d;
+        double expect = 2.0d;
+        Calculate calc = new Calculate();
+        calc.multiply(num1, num2);
+        double result = calc.getResult();
+        assertThat(result, is(expect));
+    }
 }
