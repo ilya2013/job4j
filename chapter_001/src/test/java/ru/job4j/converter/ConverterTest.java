@@ -16,7 +16,7 @@ public class ConverterTest {
       int expect = 1;
       int result;
       Converter conv = new Converter();
-      result = conv.rubToEuro(76);
+      result = conv.rubToEuro(rub);
       assertThat(result, is(expect));
   }
 
@@ -26,7 +26,7 @@ public class ConverterTest {
         int expect = 76;
         int result;
         Converter conv = new Converter();
-        result = conv.euroToRub(1);
+        result = conv.euroToRub(euro);
         assertThat(result, is(expect));
     }
 
