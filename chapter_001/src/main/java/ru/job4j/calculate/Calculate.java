@@ -13,7 +13,7 @@ public class Calculate {
 	 *@param first первое число
 	 *@param second второе число
 	 */
-	void add(double first, double second) {
+	public void add(double first, double second) {
 		this.result = first + second;
 	}
 	/**
@@ -21,7 +21,7 @@ public class Calculate {
 	 *@param first первое число
 	 *@param second второе число
 	 */
-	void subtract(double first, double second) {
+	public void subtract(double first, double second) {
 		this.result = first - second;
 	}
 
@@ -30,7 +30,7 @@ public class Calculate {
 	 *@param first первое число
 	 *@param second второе число
 	 */
-	void div(double first, double second) {
+	public void div(double first, double second) {
 		this.result = first / second;
 	}
 
@@ -39,7 +39,7 @@ public class Calculate {
 	 *@param first первое число
 	 *@param second второе число
 	 */
-	void multiply(double first, double second) {
+	public void multiply(double first, double second) {
 		this.result = first * second;
 	}
 	/**
