@@ -6,9 +6,9 @@ public class Triangle {
     private Point c;
 
     public Triangle(Point a, Point b, Point c) {
-        this.a=a;
-        this.b=b;
-        this.c=c;
+        this.a = a;
+        this.b = b;
+        this.c = c;
     }
 
     /**
@@ -24,8 +24,8 @@ public class Triangle {
      * @return Перимент.
      */
 
-    public  double period(double ab, double ac, double bc){
-        return  (ab + ac + bc)/2;
+    public  double period(double ab, double ac, double bc) {
+        return  (ab + ac + bc) / 2;
     }
 
     /**
@@ -56,7 +56,7 @@ public class Triangle {
      */
     private boolean exist(double ab, double ac, double bc) {
         boolean rsl = true;
-        if ((ab <=0.0d) || (ac <= 0.0d) || (bc <= 0.0d)){
+        if ((ab <= 0.0d) || (ac <= 0.0d) || (bc <= 0.0d)) {
             rsl = false;
         }
         return rsl;
