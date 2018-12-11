@@ -55,9 +55,13 @@ public class Triangle {
      * @return Это треугольник.
      */
     private boolean exist(double ab, double ac, double bc) {
-        boolean rsl = true;
-        if ((ab <= 0.0d) || (ac <= 0.0d) || (bc <= 0.0d)) {
-            rsl = false;
+        boolean rsl = false;
+        //if ((ab <= 0.0d) || (ac <= 0.0d) || (bc <= 0.0d)) {
+        if (((ab - ac) < bc && bc < (ab + ac))
+                && ((ab - bc) < ac && ac < (ab + bc))
+                && ((ac - bc) < ab && ab < (ac + bc))
+        ) {
+            rsl = true;
         }
         return rsl;
     }
