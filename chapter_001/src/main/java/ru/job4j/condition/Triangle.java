@@ -57,9 +57,9 @@ public class Triangle {
     private boolean exist(double ab, double ac, double bc) {
         boolean rsl = false;
         //if ((ab <= 0.0d) || (ac <= 0.0d) || (bc <= 0.0d)) {
-        if (((ab - ac) < bc && bc < (ab + ac))
-                && ((ab - bc) < ac && ac < (ab + bc))
-                && ((ac - bc) < ab && ab < (ac + bc))
+        if ((Math.abs(ab - ac) < bc && bc < (ab + ac))
+                && (Math.abs(ab - bc) < ac && ac < (ab + bc))
+                && (Math.abs(ac - bc) < ab && ab < (ac + bc))
         ) {
             rsl = true;
         }
