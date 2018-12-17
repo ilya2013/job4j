@@ -12,6 +12,7 @@ public class MatrixCheck {
         for (int rowIdx = 0; rowIdx < rowsCount; rowIdx++) {
             if ((firstDiagonal != data [rowIdx] [rowIdx]) || (secondDiagonal != data [rowsCount - 1 - rowIdx] [rowsCount - 1 - rowIdx])) {
                 result = false;
+                break;
             }
         }
         return result;
