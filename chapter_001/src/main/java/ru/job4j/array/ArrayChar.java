@@ -6,7 +6,7 @@ package ru.job4j.array;
 public class ArrayChar {
     private char[] data;
 
-    public ArrayChar(String line) {
+    public ArrayChar(@org.jetbrains.annotations.NotNull String line) {
         this.data = line.toCharArray();
     }
 
