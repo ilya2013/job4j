@@ -18,6 +18,6 @@ public class ArrayDuplicate {
                 }
             }
         }
-        return Arrays.copyOf(array, 3);
+        return Arrays.copyOf(array, array.length - doubleCount);
     }
 }
