@@ -4,7 +4,7 @@ package ru.job4j;
  * Базовый класс профессий
  */
 public class Profession {
-    String name;
+    private String name;
 
     public Profession () {
     }
