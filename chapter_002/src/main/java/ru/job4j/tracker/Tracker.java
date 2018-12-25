@@ -26,13 +26,13 @@ public class Tracker {
      * @param item запись
      * @return запись
      */
-    public  Item add (Item item) {
+    public  Item add(Item item) {
         item.setId(generateId());
         if (position < limit - 1) {
             items[position++] = item;
         } else {
             position = 0;
-            items [position] =item;
+            items [position] = item;
         }
         return item;
     }
@@ -42,7 +42,7 @@ public class Tracker {
      * @param id уникальный идектификатор
      * @param item запись
      */
-    public  void replace (String id, Item item) {
+    public  void replace(String id, Item item) {
         for (int i = 0; i < limit; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
@@ -54,11 +54,11 @@ public class Tracker {
      * Удаление записи по id
      * @param id уникальный идентификатор запись
      */
-    public  void delete (String id) {
+    public  void delete(String id) {
         for (int pos = 0; pos < limit; pos++) {
             if (items[pos].getId().equals(id)) {
-                System.arraycopy(items, pos + 1 , items, pos, items.length - pos);
-                items = Arrays.copyOf(items, items.length -1);
+                System.arraycopy(items, pos + 1, items, pos, items.length - pos);
+                items = Arrays.copyOf(items, items.length - 1);
                 break;
             }
         }
@@ -67,7 +67,7 @@ public class Tracker {
      * Вернуть все записи
      * @return записи
      */
-    public Item[] findAll () {
+    public Item[] findAll() {
         return items;
     }
 
@@ -75,9 +75,16 @@ public class Tracker {
      * Поиск по имени
      * @param key имя записи
      */
-    public  Item[] findByName (String key) {
-        //TODO Поиск записи
-        return items;
+    public  Item[] findByName(String key) {
+        int idx = 0;
+        Item[] result = new Item[limit];
+        for (Item item : items) {
+            if (item != null && item.getName().equals(key)) {
+                result[idx] = item;
+                idx++;
+            }
+        }
+        return result;
     }
     /**
      * Поиск по id

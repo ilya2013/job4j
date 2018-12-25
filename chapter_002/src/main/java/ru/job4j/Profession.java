@@ -6,10 +6,10 @@ package ru.job4j;
 public class Profession {
     private String name;
 
-    public Profession () {
+    public Profession() {
     }
 
-    public Profession (String name) {
+    public Profession(String name) {
         this.name = name;
     }
 }
