@@ -6,7 +6,7 @@ import java.util.Arrays;
  * Обертка над массивом
  */
 public class Tracker {
-    private final int limit = 100;
+    private final int limit = 10;
     private Item[] items = new Item[limit];
     private int position = 0;
 
@@ -56,9 +56,9 @@ public class Tracker {
      */
     public  void delete(String id) {
         for (int pos = 0; pos < limit; pos++) {
-            if (items[pos].getId().equals(id)) {
-                System.arraycopy(items, pos + 1, items, pos, items.length - pos);
-                items = Arrays.copyOf(items, items.length - 1);
+            if (items[pos] != null && items[pos].getId().equals(id)) {
+                System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
+                items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
                 break;
             }
         }
@@ -93,7 +93,7 @@ public class Tracker {
     public Item findById(String id) {
         Item result = null;
         for (Item item : this.items) {
-            if (item.getId().equals(id)) {
+            if (item != null && item.getId().equals(id)) {
                 result = item;
                 break;
             }

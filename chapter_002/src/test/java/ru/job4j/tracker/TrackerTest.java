@@ -35,7 +35,7 @@ public class TrackerTest {
     @Test
     public void when2ItemsWithTheSameNameThenFind2Item() {
         Item[] result;
-        Item[] expected = new Item[100];
+        Item[] expected = new Item[10];
         expected[0] = new Item("test1", "testDescription", 123L);
         expected[1] = new Item("test1", "testDescription2", 1234L);
         Tracker tracker = new Tracker();
@@ -48,6 +48,23 @@ public class TrackerTest {
         assertThat(result, arrayContainingInAnyOrder(expected));
     }
 
+    @Test
+    public void whenTwoItemInTrackerThenAfterDeleteStayOne() {
+        Item[] result;
+        Item[] item = new Item[10];
+        item[0] = new Item("test1", "testDescription", 123L);
+        item[1] = new Item("test1", "testDescription2", 1234L);
+        Item[] expected = new Item[10];
+        expected[0] = item[1];
+        Tracker tracker = new Tracker();
+        tracker.add(item[0]);
+        tracker.add(item[1]);
+        tracker.delete(item[0].getId());
+        result = tracker.findAll();
+//        assertThat(result, arrayContainingInAnyOrder(expected));
+        assertThat(result, is(expected));
+
+    }
 
 
 }
