@@ -42,26 +42,32 @@ public class Tracker {
      * @param id уникальный идектификатор
      * @param item запись
      */
-    public  void replace(String id, Item item) {
+    public  boolean replace(String id, Item item) {
+        boolean result = false;
         for (int i = 0; i < limit; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
+                result = true;
                 break;
             }
         }
+        return  result;
     }
     /**
      * Удаление записи по id
      * @param id уникальный идентификатор запись
      */
-    public  void delete(String id) {
+    public  boolean delete(String id) {
+        boolean result = false;
         for (int pos = 0; pos < limit; pos++) {
             if (items[pos] != null && items[pos].getId().equals(id)) {
                 System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
                 items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
+                result = true;
                 break;
             }
         }
+        return result;
     }
     /**
      * Вернуть все записи
@@ -84,7 +90,7 @@ public class Tracker {
                 idx++;
             }
         }
-        return result;
+        return Arrays.copyOf(result, idx);
     }
     /**
      * Поиск по id

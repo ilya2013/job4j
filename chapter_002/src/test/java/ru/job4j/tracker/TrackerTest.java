@@ -35,7 +35,7 @@ public class TrackerTest {
     @Test
     public void when2ItemsWithTheSameNameThenFind2Item() {
         Item[] result;
-        Item[] expected = new Item[10];
+        Item[] expected = new Item[2];
         expected[0] = new Item("test1", "testDescription", 123L);
         expected[1] = new Item("test1", "testDescription2", 1234L);
         Tracker tracker = new Tracker();
