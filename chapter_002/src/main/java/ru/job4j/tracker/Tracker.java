@@ -31,8 +31,7 @@ public class Tracker {
         if (position < limit - 1) {
             items[position++] = item;
         } else {
-            position = 0;
-            items [position] = item;
+            System.out.println("Превышен лимит");
         }
         return item;
     }
@@ -44,7 +43,7 @@ public class Tracker {
      */
     public  boolean replace(String id, Item item) {
         boolean result = false;
-        for (int i = 0; i < limit; i++) {
+        for (int i = 0; i <= position; i++) {
             if (items[i].getId().equals(id)) {
                 items[i] = item;
                 result = true;
@@ -59,10 +58,11 @@ public class Tracker {
      */
     public  boolean delete(String id) {
         boolean result = false;
-        for (int pos = 0; pos < limit; pos++) {
+        for (int pos = 0; pos <= position; pos++) {
             if (items[pos] != null && items[pos].getId().equals(id)) {
                 System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
-                items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
+                this.position--;
+//                items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
                 result = true;
                 break;
             }
@@ -84,9 +84,9 @@ public class Tracker {
     public  Item[] findByName(String key) {
         int idx = 0;
         Item[] result = new Item[limit];
-        for (Item item : items) {
-            if (item != null && item.getName().equals(key)) {
-                result[idx] = item;
+        for (int pos = 0; pos <= position; pos++) {
+            if (items[pos] != null && items[pos].getName().equals(key)) {
+                result[idx] = items[pos];
                 idx++;
             }
         }

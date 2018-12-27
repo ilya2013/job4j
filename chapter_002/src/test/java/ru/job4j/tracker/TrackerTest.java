@@ -63,8 +63,46 @@ public class TrackerTest {
         result = tracker.findAll();
 //        assertThat(result, arrayContainingInAnyOrder(expected));
         assertThat(result, is(expected));
-
     }
 
+    @Test
+    public void whenTwoItemInTrackerThenAfterDeleteStayOne2() {
+        Item[] result;
+        Item[] item = new Item[10];
+        item[0] = new Item("test1", "testDescription", 123L);
+        item[1] = new Item("test1", "testDescription2", 1234L);
+        Item[] expected = new Item[10];
+        expected[0] = item[0];
+        Tracker tracker = new Tracker();
+        tracker.add(item[0]);
+        tracker.add(item[1]);
+        tracker.delete(item[1].getId());
+        result = tracker.findAll();
+//        assertThat(result, arrayContainingInAnyOrder(expected));
+        assertThat(result, is(expected));
+    }
 
+    @Test
+    public void when4ItemInTrackerThenAfterDeleteOneStayThree2() {
+        Item[] result;
+        Item[] item = new Item[10];
+        item[0] = new Item("test1", "testDescription", 123L);
+        item[1] = new Item("test2", "testDescription2", 1234L);
+        item[2] = new Item("test3", "testDescription3", 12345L);
+        item[3] = new Item("test4", "testDescription4", 123346L);
+        Item[] expected = new Item[10];
+        expected[0] = item[0];
+        expected[1] = item[1];
+        expected[2] = item[3];
+        Tracker tracker = new Tracker();
+        tracker.add(item[0]);
+        tracker.add(item[1]);
+        tracker.add(item[2]);
+        tracker.add(item[3]);
+//        tracker.delete(item[1].getId());
+        tracker.delete(item[2].getId());
+        result = tracker.findAll();
+//        assertThat(result, arrayContainingInAnyOrder(expected));
+        assertThat(result, is(expected));
+    }
 }
