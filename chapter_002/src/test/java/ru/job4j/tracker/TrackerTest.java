@@ -2,6 +2,8 @@ package ru.job4j.tracker;
 
 import org.junit.Test;
 
+import java.util.Arrays;
+
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.junit.Assert.*;
 import static org.hamcrest.core.Is.is;
@@ -50,19 +52,21 @@ public class TrackerTest {
 
     @Test
     public void whenTwoItemInTrackerThenAfterDeleteStayOne() {
+        int size = 10;
         Item[] result;
+        Tracker tracker = new Tracker();
         Item[] item = new Item[10];
         item[0] = new Item("test1", "testDescription", 123L);
         item[1] = new Item("test1", "testDescription2", 1234L);
         Item[] expected = new Item[10];
         expected[0] = item[1];
-        Tracker tracker = new Tracker();
+
         tracker.add(item[0]);
         tracker.add(item[1]);
         tracker.delete(item[0].getId());
         result = tracker.findAll();
 //        assertThat(result, arrayContainingInAnyOrder(expected));
-        assertThat(result, is(expected));
+        assertThat(result, is(Arrays.copyOf(expected, 1)));
     }
 
     @Test
@@ -79,7 +83,43 @@ public class TrackerTest {
         tracker.delete(item[1].getId());
         result = tracker.findAll();
 //        assertThat(result, arrayContainingInAnyOrder(expected));
-        assertThat(result, is(expected));
+        assertThat(result, is(Arrays.copyOf(expected, 1)));
+    }
+
+    @Test
+    public void whenTenItemInTrackerThenAfterDeleteStayOne2() {
+        Item[] result;
+        Item[] item = new Item[10];
+        item[0] = new Item("test1", "testDescription", 123L);
+        item[1] = new Item("test1", "testDescription2", 1234L);
+        item[2] = new Item("test1", "testDescription3", 1234L);
+        item[3] = new Item("test1", "testDescription4", 1234L);
+        item[4] = new Item("test1", "testDescription5", 1234L);
+        item[5] = new Item("test1", "testDescription6", 1234L);
+        item[6] = new Item("test1", "testDescription7", 1234L);
+        item[7] = new Item("test1", "testDescription8", 1234L);
+        item[8] = new Item("test1", "testDescription9", 1234L);
+        item[9] = new Item("test1", "testDescription10", 1234L);
+        Item[] expected = new Item[10];
+        expected[0] = item[0];
+        Tracker tracker = new Tracker();
+        //Добавляем элементы в кэш объекта Tracker
+        for (Item element : item) {
+            tracker.add(element);
+        }
+        tracker.delete(item[1].getId());
+        tracker.delete(item[9].getId());
+        tracker.delete(item[8].getId());
+        tracker.delete(item[5].getId());
+        tracker.delete(item[6].getId());
+        tracker.delete(item[7].getId());
+        tracker.delete(item[4].getId());
+        tracker.delete(item[3].getId());
+        tracker.delete(item[2].getId());
+        result = tracker.findAll();
+        System.out.println(Arrays.toString(result));
+//        assertThat(result, arrayContainingInAnyOrder(expected));
+        assertThat(result, is(Arrays.copyOf(expected, 1)));
     }
 
     @Test
@@ -103,6 +143,6 @@ public class TrackerTest {
         tracker.delete(item[2].getId());
         result = tracker.findAll();
 //        assertThat(result, arrayContainingInAnyOrder(expected));
-        assertThat(result, is(expected));
+        assertThat(result, is(Arrays.copyOf(expected, 3)));
     }
 }

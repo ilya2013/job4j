@@ -6,12 +6,17 @@ import java.util.Arrays;
  * Обертка над массивом
  */
 public class Tracker {
-    private final int limit = 10;
+    private  int limit = 10;
     private Item[] items = new Item[limit];
-    private int position = 0;
+    private int position = -1;
 
     public Tracker() {
     }
+
+    public Tracker(int limit) {
+        this.limit = limit;
+    }
+
     /**
      * Метод генерирует уникальный ключ для заявки.
      * Так как у заявки нет уникальности полей, имени и описание. Для идентификации нам нужен уникальный ключ.
@@ -29,7 +34,8 @@ public class Tracker {
     public  Item add(Item item) {
         item.setId(generateId());
         if (position < limit - 1) {
-            items[position++] = item;
+            position++;
+            items[position] = item;
         } else {
             System.out.println("Превышен лимит");
         }
@@ -60,7 +66,9 @@ public class Tracker {
         boolean result = false;
         for (int pos = 0; pos <= position; pos++) {
             if (items[pos] != null && items[pos].getId().equals(id)) {
-                System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
+                if (pos != position) {
+                    System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
+                }
                 this.position--;
 //                items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
                 result = true;
@@ -74,7 +82,7 @@ public class Tracker {
      * @return записи
      */
     public Item[] findAll() {
-        return items;
+        return Arrays.copyOf(items, position + 1);
     }
 
     /**
