@@ -1,5 +1,7 @@
 package ru.job4j.pseudo;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -7,15 +9,24 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class PaintTest {
+    PrintStream stdout = System.out;
+    // Создаем буфур для хранения вывода.
+    ByteArrayOutputStream out = new ByteArrayOutputStream();
+    //Заменяем стандартный вывод на вывод в пямять для тестирования.
+    @Before
+    public void loadOutput() {
+        System.out.println("execute before test");
+        System.setOut(new PrintStream(this.out));
+    }
+
+    @After
+    public void backOutput() {
+        System.setOut(this.stdout);
+        System.out.println("execute after test");
+    }
 
     @Test
     public void whenShapeTriangleThenDrawTriangle() {
-// получаем ссылку на стандартный вывод в консоль.
-        PrintStream stdout = System.out;
-        // Создаем буфур для хранения вывода.
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        //Заменяем стандартный вывод на вывод в пямять для тестирования.
-        System.setOut(new PrintStream(out));
         // выполняем действия пишушиее в консоль.
         (new Paint()).draw(new Triangle());
         assertThat(
@@ -29,18 +40,10 @@ public class PaintTest {
                                 .toString()
                 )
         );
-        System.setOut(stdout);
     }
 
     @Test
     public void whenShapeSquareThenDrawSquare() {
-        // получаем ссылку на стандартный вывод в консоль.
-        PrintStream stdout = System.out;
-        // Создаем буфур для хранения вывода.
-        ByteArrayOutputStream out = new ByteArrayOutputStream();
-        //Заменяем стандартный вывод на вывод в пямять для тестирования.
-        System.setOut(new PrintStream(out));
-        // выполняем действия пишушиее в консоль.
         (new Paint()).draw(new Square());
         assertThat(
                 new String(out.toByteArray()),
@@ -54,6 +57,5 @@ public class PaintTest {
                                 .toString()
                 )
         );
-        System.setOut(stdout);
     }
 }
