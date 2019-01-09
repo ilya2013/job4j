@@ -66,7 +66,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions.values()) {
             if (action != null) {
-                System.out.format("%d. %s %s", action.key(), action.info(), System.lineSeparator());
+                System.out.format("%d. %s%s", action.key(), action.info(), System.lineSeparator());
             }
         }
     }

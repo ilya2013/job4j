@@ -80,25 +80,23 @@ public void whenAddOneItemThenShowsOneItem2() {
             new String(out.toByteArray()),
             is(
                     new StringBuilder()
-                            .append("Меню.\\r\n"
-                                    + "0. Add new Item\\r\n"
-                                    + "1. Show all items\\r\n"
-                                    + "2. Edit item\\r\n"
-                                    + "3. Delete item\\r\n"
-                                    + "4. Find item by Id\\r\n"
-                                    + "5. Find items by name\\r\n"
-                                    + "6. Exit Program\\r\n"
-                                    + "Введите пункт меню :  1\\r\n"
-                                    + "------------ Заявка : Id " + testItem.getId() + ", Name item1, Desc desc1, Created 1-----------\\r\n"
-                                    + "Меню.\\r\n"
-                                    + "0. Add new Item\\r\n"
-                                    + "1. Show all items\\r\n"
-                                    + "2. Edit item\\r\n"
-                                    + "3. Delete item\\r\n"
-                                    + "4. Find item by Id\\r\n"
-                                    + "5. Find items by name\\r\n"
-                                    + "6. Exit Program\\r\n"
-                                    + "Введите пункт меню :  6\\r\\n")
+                            .append("0. Add item" + System.lineSeparator()
+                                    + "1. Show all items" + System.lineSeparator()
+                                    + "2. Edit item" + System.lineSeparator()
+                                    + "3. Delete item" + System.lineSeparator()
+                                    + "4. Find item by Id" + System.lineSeparator()
+                                    + "5. Find items by name" + System.lineSeparator()
+                                    + "6. Exit Program" + System.lineSeparator()
+                                    + "Введите пункт меню :  1" + System.lineSeparator()
+                                    + "------------ Заявка : Id " + testItem.getId() + ", Name item1, Desc desc1, Created 1-----------" + System.lineSeparator()
+                                    + "0. Add item" + System.lineSeparator()
+                                    + "1. Show all items" + System.lineSeparator()
+                                    + "2. Edit item" + System.lineSeparator()
+                                    + "3. Delete item" + System.lineSeparator()
+                                    + "4. Find item by Id" + System.lineSeparator()
+                                    + "5. Find items by name" + System.lineSeparator()
+                                    + "6. Exit Program" + System.lineSeparator()
+                                    + "Введите пункт меню :  6" + System.lineSeparator())
                             .toString()
             )
     );
