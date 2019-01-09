@@ -43,6 +43,8 @@ public class StartUI {
      */
     private final Tracker tracker;
 
+    private MenuTracker menuTracker;
+
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
@@ -57,23 +59,14 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
+        menuTracker = new MenuTracker(input, tracker);
         boolean exit = false;
         while (!exit) {
-            this.showMenu();
+            menuTracker.show();
+            //this.showMenu();
             String answer = this.input.ask("Введите пункт меню : ");
-            if (ADD.equals(answer)) {
-                //добавление заявки вынесено в отдельный метод.
-                this.createItem();
-            } else if (SHOWALL.equals(answer)) {
-                showAll();
-            } else if (EDIT.equals(answer)) {
-                editItem();
-            } else if (DELETE.equals(answer)) {
-                deleteItem();
-            } else if (FINDBYID.equals(answer)) {
-                findById();
-            } else if (FINDBYNAME.equals(answer)) {
-                findByName();
+            if (!EXIT.equals(answer)) {
+                menuTracker.select(answer);
             } else if (EXIT.equals(answer)) {
                 exit = true;
             }

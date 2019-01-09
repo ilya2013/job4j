@@ -30,6 +30,13 @@ public class Item {
         this.desc = desc;
     }
 
+    public Item(String id, String name, String desc, long created) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.created = created;
+    }
+
     public String getId() {
         return id;
     }
