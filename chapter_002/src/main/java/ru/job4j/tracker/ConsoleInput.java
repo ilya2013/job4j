@@ -15,6 +15,7 @@ public class ConsoleInput implements Input {
     @Override
     public int ask(String question, int[] range) {
         boolean exists = false;
+        System.out.println(question + System.lineSeparator());
         int key = Integer.valueOf(scanner.next());
         for (int value : range) {
             if (key == value) {

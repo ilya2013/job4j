@@ -111,7 +111,7 @@ public void whenAddOneItemThenShowsOneItem2() {
         assertThat(
                 this.out.toString(),
                 is(
-                        String.format("Введите валидные данные." + System.lineSeparator())
+                        String.format("Enter invalid" + System.lineSeparator() + "Введите валидные данные." + System.lineSeparator() + "Enter 1" + System.lineSeparator() )
                 )
         );
     }
