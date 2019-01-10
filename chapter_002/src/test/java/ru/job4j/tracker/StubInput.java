@@ -38,8 +38,21 @@ public class StubInput implements Input {
 
     @Override
     public int ask(String question, int[] range) {
-        System.out.println(question + " " + this.value[this.position]);
-        return Integer.valueOf(this.value[this.position++]);
+        int result = -1;
+        boolean exists = false;
+        int currenPosition = this.position;
+        this.position++;
+        System.out.println(question + " " + this.value[currenPosition]);
+        for (int value : range) {
+            if (Integer.valueOf(this.value[currenPosition]) == value) {
+                exists = true;
+                result = Integer.valueOf(this.value[currenPosition]);
+            }
+        }
+        if (!exists) {
+            throw new MenuOutException();
+        }
+        return result;
     }
 
 

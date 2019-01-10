@@ -22,10 +22,9 @@ public class ConsoleInput implements Input {
                 exists = true;
             }
         }
-        if (exists) {
-            return key;
-        } else {
+        if (!exists) {
             throw new MenuOutException();
         }
+        return key;
     }
 }
