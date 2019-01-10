@@ -42,7 +42,6 @@ public class StartUI {
         boolean exit = false;
         while (!exit) {
             menuTracker.show();
-            //this.showMenu();
             int answer = this.input.ask("Введите пункт меню : ", menuTracker.menuKeys());
             if (EXIT != answer) {
                 menuTracker.select(String.valueOf(answer));
@@ -58,6 +57,6 @@ public class StartUI {
      * @param args Входные запуска
      */
     public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
     }
 }

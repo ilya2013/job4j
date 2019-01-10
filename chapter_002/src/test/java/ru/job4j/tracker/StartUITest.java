@@ -33,7 +33,7 @@ public class StartUITest {
                 "1",
                 "6"}; //Выход из программы
         StubInput stubInput = new StubInput(steps);
-        StartUI startUI = new StartUI(stubInput, new Tracker());
+        StartUI startUI = new StartUI(new ValidateInput(stubInput), new Tracker());
         startUI.init();
     }
 
@@ -101,4 +101,18 @@ public void whenAddOneItemThenShowsOneItem2() {
             )
     );
 }
+
+    @Test
+    public void whenInvalidInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"invalid", "1"})
+        );
+        input.ask("Enter", new int[] {1});
+        assertThat(
+                this.out.toString(),
+                is(
+                        String.format("Введите валидные данные." + System.lineSeparator())
+                )
+        );
+    }
 }
