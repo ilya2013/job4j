@@ -5,6 +5,31 @@ import ru.job4j.tracker.actions.*;
 import java.util.*;
 
 public class MenuTracker {
+
+    /**
+     * Константа меню для добавления новой заявки.
+     */
+    private static final String ADD = "0";
+    /**
+     * Константа меню для отображения всех элементов.
+     */
+    private static final String SHOWALL = "1";
+    /**
+     * Константа меню для редактирования элемента.
+     */
+    private static final String EDIT = "2";
+    /**
+     * Константа меню для удаления элемента.
+     */
+    private static final String DELETE = "3";
+    /**
+     * Константа меню для поиска по id.
+     */
+    private static final String FINDBYID = "4";
+    /**
+     * Константа меню для поиска по name.
+     */
+    private static final String FINDBYNAME = "5";
     /**
      * @param хранит ссылку на объект .
      */
@@ -42,12 +67,12 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.put("0", (new AddItem(0, "Add item")));
-        this.actions.put("1", (new FindAllItem(1, "Show all items")));
-        this.actions.put("2", (new UpdateItem(2, "Edit item")));
-        this.actions.put("3", (new DeleteItem(3, "Delete item")));
-        this.actions.put("4", (new FindItemById(4, "Find item by Id")));
-        this.actions.put("5", (new FindByNameItem(5, "Find items by name")));
+        this.actions.put(ADD, (new AddItem(Integer.valueOf(ADD), "Add item")));
+        this.actions.put(SHOWALL, (new FindAllItem(Integer.valueOf(SHOWALL), "Show all items")));
+        this.actions.put(EDIT, (new UpdateItem(Integer.valueOf(EDIT), "Edit item")));
+        this.actions.put(DELETE, (new DeleteItem(Integer.valueOf(DELETE), "Delete item")));
+        this.actions.put(FINDBYID, (new FindItemById(Integer.valueOf(FINDBYID), "Find item by Id")));
+        this.actions.put(FINDBYNAME, (new FindByNameItem(Integer.valueOf(FINDBYNAME), "Find items by name")));
         this.actions.put("6", new ExitProgram(6, "Exit Program"));
     }
 
