@@ -76,6 +76,11 @@ public class MenuTracker {
         this.actions.put("6", new ExitProgram(6, "Exit Program"));
     }
 
+    public int[] menuKeys() {
+        int[] menuKeys = {0, 1, 2, 3, 4, 5, 6};
+        return menuKeys;
+    }
+
     /**
      * Метод в зависимости от указанного ключа, выполняет соотвествующие действие.
      *

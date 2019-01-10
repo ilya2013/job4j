@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.Arrays;
+
 /**
  * @version $Id$
  * @since 0.1
@@ -9,7 +11,7 @@ public class StartUI {
     /**
      * Константа для выхода из цикла.
      */
-    private static final String EXIT = "6";
+    private static final int EXIT = 6;
     /**
      * Получение данных от пользователя.
      */
@@ -41,10 +43,10 @@ public class StartUI {
         while (!exit) {
             menuTracker.show();
             //this.showMenu();
-            String answer = this.input.ask("Введите пункт меню : ");
-            if (!EXIT.equals(answer)) {
-                menuTracker.select(answer);
-            } else if (EXIT.equals(answer)) {
+            int answer = this.input.ask("Введите пункт меню : ", menuTracker.menuKeys());
+            if (EXIT != answer) {
+                menuTracker.select(String.valueOf(answer));
+            } else if (EXIT == answer) {
                 exit = true;
             }
         }
@@ -56,6 +58,6 @@ public class StartUI {
      * @param args Входные запуска
      */
     public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 }

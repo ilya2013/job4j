@@ -8,8 +8,23 @@ public class ConsoleInput implements Input {
 
     @Override
     public String ask(String question) {
-
         System.out.println(question);
         return scanner.next();
+    }
+
+    @Override
+    public int ask(String question, int[] range) {
+        boolean exists = false;
+        int key = Integer.valueOf(scanner.next());
+        for (int value : range) {
+            if (key == value) {
+                exists = true;
+            }
+        }
+        if (exists) {
+            return key;
+        } else {
+            throw new MenuOutException();
+        }
     }
 }
