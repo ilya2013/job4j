@@ -4,18 +4,10 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.StartUI;
 import ru.job4j.tracker.Tracker;
 
-public class DeleteItem implements UserAction {
-    private int key;
-    private String info;
+public class DeleteItem extends BaseAction {
 
     public DeleteItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     @Override
@@ -28,10 +20,5 @@ public class DeleteItem implements UserAction {
             System.out.println(" Заявка с указанным ID не найдена");
         }
         System.out.println("------------ Завершено удаление заявки-----------");
-    }
-
-    @Override
-    public String info() {
-        return this.info;
     }
 }

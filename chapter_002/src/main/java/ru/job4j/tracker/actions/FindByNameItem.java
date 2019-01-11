@@ -4,18 +4,10 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-public class FindByNameItem implements UserAction {
-    private int key;
-    private String info;
+public class FindByNameItem extends BaseAction {
 
     public FindByNameItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     @Override
@@ -31,10 +23,5 @@ public class FindByNameItem implements UserAction {
             System.out.println(" Заявка с указанным name не найдена");
         }
         System.out.println("------------ Поиск заявки по имени завершён-----------");
-    }
-
-    @Override
-    public String info() {
-        return this.info;
     }
 }

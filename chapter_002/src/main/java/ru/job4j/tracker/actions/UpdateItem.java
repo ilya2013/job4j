@@ -4,18 +4,10 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-public class UpdateItem implements UserAction {
-    private int key;
-    private String info;
+public class UpdateItem extends BaseAction {
 
     public UpdateItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     @Override
@@ -33,10 +25,5 @@ public class UpdateItem implements UserAction {
 
         System.out.println("------------ Завершено редактирование-----------");
 
-    }
-
-    @Override
-    public String info() {
-        return info;
     }
 }

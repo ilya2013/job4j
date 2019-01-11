@@ -4,18 +4,10 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
-public class AddItem implements UserAction {
-    private int key;
-    private String info;
+public class AddItem extends BaseAction {
 
     public AddItem(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     @Override
@@ -26,10 +18,5 @@ public class AddItem implements UserAction {
         Item item = new Item(name, desc);
         tracker.add(item);
         System.out.println("------------ Новая заявка с getId : " + item.getId() + "-----------");
-    }
-
-    @Override
-    public String info() {
-        return this.info;
     }
 }

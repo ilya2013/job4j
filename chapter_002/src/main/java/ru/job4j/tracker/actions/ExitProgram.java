@@ -3,27 +3,14 @@ package ru.job4j.tracker.actions;
 import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Tracker;
 
-public class ExitProgram implements UserAction  {
-    private int key;
-    private String info;
+public class ExitProgram extends BaseAction {
 
     public ExitProgram(int key, String info) {
-        this.key = key;
-        this.info = info;
-    }
-
-    @Override
-    public int key() {
-        return this.key;
+        super(key, info);
     }
 
     @Override
     public void execute(Input input, Tracker tracker) {
 
-    }
-
-    @Override
-    public String info() {
-        return this.info;
     }
 }
