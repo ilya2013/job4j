@@ -45,7 +45,7 @@ public class StartUI {
             int answer = this.input.ask("Введите пункт меню : ", menuTracker.menuKeys());
             if (EXIT != answer) {
                 menuTracker.select(String.valueOf(answer));
-            } else if (EXIT == answer) {
+            } else {
                 exit = true;
             }
         }

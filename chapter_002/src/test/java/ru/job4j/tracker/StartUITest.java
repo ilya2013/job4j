@@ -115,4 +115,22 @@ public void whenAddOneItemThenShowsOneItem2() {
                 )
         );
     }
+
+    @Test
+    public void whenInvalidMenuNumberInput() {
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[] {"invalid", "-1", "1"})
+        );
+        input.ask("Enter", new int[] {1});
+        assertThat(
+                this.out.toString(),
+                is(
+                        String.format("Enter invalid" + System.lineSeparator()
+                                + "Введите валидные данные." + System.lineSeparator()
+                                + "Enter -1" + System.lineSeparator()
+                                + "Выберете существуюший пункт меню." + System.lineSeparator()
+                                + "Enter 1" + System.lineSeparator())
+                )
+        );
+    }
 }
