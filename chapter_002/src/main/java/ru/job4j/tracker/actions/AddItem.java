@@ -5,8 +5,8 @@ import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
 public class AddItem implements UserAction {
-    private int key = 1;
-    private String info = "Add new Item.";
+    private int key;
+    private String info;
 
     public AddItem(int key, String info) {
         this.key = key;

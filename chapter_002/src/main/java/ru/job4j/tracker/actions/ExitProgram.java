@@ -4,8 +4,8 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Tracker;
 
 public class ExitProgram implements UserAction  {
-    private int key = 6;
-    private String info = "Exit progam";
+    private int key;
+    private String info;
 
     public ExitProgram(int key, String info) {
         this.key = key;

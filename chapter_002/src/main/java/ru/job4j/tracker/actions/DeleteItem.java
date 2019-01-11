@@ -5,8 +5,8 @@ import ru.job4j.tracker.StartUI;
 import ru.job4j.tracker.Tracker;
 
 public class DeleteItem implements UserAction {
-    private int key = 3;
-    private String info = "Delete item";
+    private int key;
+    private String info;
 
     public DeleteItem(int key, String info) {
         this.key = key;

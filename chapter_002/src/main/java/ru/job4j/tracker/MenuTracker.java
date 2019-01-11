@@ -77,7 +77,11 @@ public class MenuTracker {
     }
 
     public int[] menuKeys() {
-        int[] menuKeys = {0, 1, 2, 3, 4, 5, 6};
+        int idx = 0;
+        int[] menuKeys = new int[this.actions.keySet().size()];
+        for (String key : this.actions.keySet()) {
+            menuKeys[idx++] = Integer.valueOf(key);
+        }
         return menuKeys;
     }
 

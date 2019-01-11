@@ -5,8 +5,8 @@ import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
 public class FindItemById implements UserAction {
-    private int key = 6;
-    private String info = "Find item by Id";
+    private int key;
+    private String info;
 
     public FindItemById(int key, String info) {
         this.key = key;
