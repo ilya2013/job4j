@@ -66,11 +66,78 @@ public class Logic {
         return rst;
     }
 
+//    public boolean isWin() {
+//        int[][] table = this.convert();
+////        boolean colWin = true;
+////        boolean rowWin = true;
+//        boolean result = false;
+////        for (int i = 0; i < this.size; i++) {
+//            //Поиск столбца и сточки на проверку
+//            if (table[i][i] == 1) {
+//                //Проверка строчки
+//                for (int col = 0; col < this.size; col++) {
+//                    colWin &= (table[i][col] == 1);
+//                    if (!colWin) {
+//                        break;
+//                    }
+//                }
+//                //Проверка столбца
+//                if (!colWin) {
+//                    for (int row = 0; row < this.size; row++) {
+//                        rowWin &= (table[row][i] == 1);
+//                        if (!rowWin) {
+//                            break;
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//        if (rowWin || colWin) {
+//            result = true;
+//        }
+
+
+//        return result;
+//    }
+
     public boolean isWin() {
         int[][] table = this.convert();
+        int checkRow = -1;
+        int checkCol = -1;
         boolean result = false;
-        return result;
+        for (int i = 0; i < this.size; i++) {
+            //Поиск столбца и сточки на проверку
+            if (table[i][i] == 1) {
+                //Строки проверку
+                for (int col = 0; col < this.size; col++) {
+                   if (table[i][col] == 1) {
+                       checkRow = col;
+                   } else {
+                       break;
+                   }
+                }
+                //Проверка столбца
+                if (checkRow < 1) {
+                    for (int row = 0; row < this.size; row++) {
+                        if (table[row][i] == 1) {
+                            checkCol = row;
+                        } else {
+                            break;
+                        }
+                    }
+                }
+                if ((checkRow == this.size - 1) || (checkCol == this.size - 1)) {
+                    result = true;
+                    break;
+                }
+            }
+        }
+
+       return result;
     }
+
+
+
 
     public int[][] convert() {
         int[][] table = new int[this.size][this.size];

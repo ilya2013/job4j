@@ -7,30 +7,32 @@
         <groupId>ru.job4j</groupId>
         <version>2.0</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>puzzle</artifactId>
+    <packaging>jar</packaging>
+<!--&lt;!&ndash;-->
+    <!--<dependencies>-->
+    <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-graphics &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-graphics</artifactId>-->
+            <!--<version>11</version>-->
+        <!--</dependency>-->
 
-    <dependencies>
-    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-graphics -->
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-graphics</artifactId>
-        <version>11</version>
-    </dependency>
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-base &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-base</artifactId>-->
+            <!--<version>11</version>-->
+        <!--</dependency>-->
 
-    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-base -->
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-base</artifactId>
-        <version>11</version>
-    </dependency>
-
-    <!-- https://mvnrepository.com/artifact/org.openjfx/javafx-controls -->
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-controls</artifactId>
-        <version>11</version>
-    </dependency>
-    </dependencies>
-
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/org.openjfx/javafx-controls &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>org.openjfx</groupId>-->
+            <!--<artifactId>javafx-controls</artifactId>-->
+            <!--<version>11</version>-->
+        <!--</dependency>-->
+    <!--</dependencies>-->
+<!--&#45;&#45;-->
 </project>
