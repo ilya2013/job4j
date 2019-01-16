@@ -41,8 +41,8 @@ public class Logic {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -101,24 +101,44 @@ public class Logic {
 //    }
 
     public boolean isWin() {
+        boolean result;
+        long start;
+        long finish;
+        start = System.currentTimeMillis();
+        result = isWinMy();
+        finish = System.currentTimeMillis();
+        System.out.println(finish - start);
+
+        start = System.currentTimeMillis();
+        result = isWinRecomendent();
+        finish = System.currentTimeMillis();
+        System.out.println(finish - start);
+        return result;
+    }
+
+    public boolean isWinMy() {
         int[][] table = this.convert();
         int checkRow = -1;
         int checkCol = -1;
+        int iterCount = 0;
         boolean result = false;
         for (int i = 0; i < this.size; i++) {
+            iterCount++;
             //Поиск столбца и сточки на проверку
             if (table[i][i] == 1) {
                 //Строки проверку
                 for (int col = 0; col < this.size; col++) {
-                   if (table[i][col] == 1) {
-                       checkRow = col;
-                   } else {
-                       break;
-                   }
+                    iterCount++;
+                    if (table[i][col] == 1) {
+                        checkRow = col;
+                    } else {
+                        break;
+                    }
                 }
                 //Проверка столбца
                 if (checkRow < 1) {
                     for (int row = 0; row < this.size; row++) {
+                        iterCount++;
                         if (table[row][i] == 1) {
                             checkCol = row;
                         } else {
@@ -132,11 +152,36 @@ public class Logic {
                 }
             }
         }
-
-       return result;
+        System.out.format("Кол-во итераций в методе isWinMy: %s%s", iterCount, System.lineSeparator());
+        return result;
     }
 
-
+    public boolean isWinRecomendent() {
+        int[][] table = this.convert();
+        int checkRow;
+        int checkCol;
+        int iterCount = 0;
+        boolean result = false;
+        for (int i = 0; i < this.size; i++) {
+            checkRow = 0;
+            checkCol = 0;
+            for (int j = 0; j < this.size; j++) {
+                if (table[i][j] == 1) {
+                    checkRow++;
+                }
+                if (table[j][i] == 1) {
+                    checkCol++;
+                }
+                iterCount++;
+            }
+            if ((checkCol == this.size) || (checkRow == this.size)) {
+                result = true;
+                break;
+            }
+        }
+        System.out.format("Кол-во итераций в методе isWinRecomendent: %s%s", iterCount, System.lineSeparator());
+        return result;
+    }
 
 
     public int[][] convert() {

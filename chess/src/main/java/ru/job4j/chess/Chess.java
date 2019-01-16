@@ -1,10 +1,9 @@
-package ru.job4j.puzzle;
+package ru.job4j.chess;
 
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -13,25 +12,27 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import ru.job4j.puzzle.firuges.Block;
-import ru.job4j.puzzle.firuges.Cell;
-import ru.job4j.puzzle.firuges.Checker;
-import ru.job4j.puzzle.firuges.Figure;
+import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.black.*;
+import ru.job4j.chess.firuges.white.*;
 
-import java.util.Random;
+public class Chess extends Application {
+    private static final String JOB4J = "Шахматы на www.job4j.ru";
+    private final int size = 8;
+    private final Logic logic = new Logic();
 
-public class Puzzle extends Application {
-    private static final String JOB4J = "Пазлы на www.job4j.ru";
-    private final int size = 100;
-    private final Logic logic = new Logic(size);
-
-    private Rectangle buildRectangle(int x, int y, int size) {
+    private Rectangle buildRectangle(int x, int y, int size, boolean white) {
         Rectangle rect = new Rectangle();
         rect.setX(x * size);
         rect.setY(y * size);
         rect.setHeight(size);
         rect.setWidth(size);
-        rect.setFill(Color.WHITE);
+        if (white) {
+            rect.setFill(Color.WHITE);
+        } else {
+            rect.setFill(Color.GRAY);
+        }
         rect.setStroke(Color.BLACK);
         return rect;
     }
@@ -59,10 +60,9 @@ public class Puzzle extends Application {
         );
         rect.setOnMouseReleased(
                 event -> {
-                    if (logic.move(this.extract(momento.getX(), momento.getY()), this.extract(event.getX(), event.getY()))) {
+                    if (logic.move(this.findBy(momento.getX(), momento.getY()), this.findBy(event.getX(), event.getY()))) {
                         rect.setX(((int) event.getX() / 40) * 40 + 5);
                         rect.setY(((int) event.getY() / 40) * 40 + 5);
-                        checkWinner();
                     } else {
                         rect.setX(((int) momento.getX() / 40) * 40 + 5);
                         rect.setY(((int) momento.getY() / 40) * 40 + 5);
@@ -72,22 +72,12 @@ public class Puzzle extends Application {
         return rect;
     }
 
-    private void checkWinner() {
-        if (this.logic.isWin()) {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle(JOB4J);
-            alert.setHeaderText(null);
-            alert.setContentText("Пазл решен! Начните новую Игру!");
-            alert.showAndWait();
-        }
-    }
-
     private Group buildGrid() {
         Group panel = new Group();
         for (int y = 0; y != this.size; y++) {
             for (int x = 0; x != this.size; x++) {
                 panel.getChildren().add(
-                        this.buildRectangle(x, y, 40)
+                        this.buildRectangle(x, y, 40, (x + y) % 2 == 0)
                 );
             }
         }
@@ -119,24 +109,46 @@ public class Puzzle extends Application {
         Group grid = this.buildGrid();
         this.logic.clean();
         border.setCenter(grid);
-        this.generate(true, size + 1, grid);
-        this.generate(false, size, grid);
+        this.buildWhiteTeam(grid);
+        this.buildBlackTeam(grid);
     }
 
-    public void generate(boolean block, int total,  Group grid) {
-        int count = total;
-        final Random random = new Random();
-        while (count > 0) {
-            Cell position = new Cell(random.nextInt(size), random.nextInt(size));
-            if (this.logic.isFree(position)) {
-                if (block) {
-                    this.add(new Block(position), grid);
-                } else {
-                    this.add(new Checker(position), grid);
-                }
-                count--;
-            }
-        }
+    private void buildBlackTeam(Group grid) {
+        this.add(new PawnBlack(Cell.A7), grid);
+        this.add(new PawnBlack(Cell.B7), grid);
+        this.add(new PawnBlack(Cell.C7), grid);
+        this.add(new PawnBlack(Cell.D7), grid);
+        this.add(new PawnBlack(Cell.E7), grid);
+        this.add(new PawnBlack(Cell.F7), grid);
+        this.add(new PawnBlack(Cell.G7), grid);
+        this.add(new PawnBlack(Cell.H7), grid);
+        this.add(new RookBlack(Cell.A8), grid);
+        this.add(new KnightBlack(Cell.B8), grid);
+        this.add(new BishopBlack(Cell.C8), grid);
+        this.add(new QeenBlack(Cell.D8), grid);
+        this.add(new KingBlack(Cell.E8), grid);
+        this.add(new BishopBlack(Cell.F8), grid);
+        this.add(new KnightBlack(Cell.G8), grid);
+        this.add(new RookBlack(Cell.H8), grid);
+    }
+
+    public void buildWhiteTeam(Group grid) {
+        this.add(new PawnWhite(Cell.A2), grid);
+        this.add(new PawnWhite(Cell.B2), grid);
+        this.add(new PawnWhite(Cell.C2), grid);
+        this.add(new PawnWhite(Cell.D2), grid);
+        this.add(new PawnWhite(Cell.E2), grid);
+        this.add(new PawnWhite(Cell.F2), grid);
+        this.add(new PawnWhite(Cell.G2), grid);
+        this.add(new PawnWhite(Cell.H2), grid);
+        this.add(new RookWhite(Cell.A1), grid);
+        this.add(new KnightWhite(Cell.B1), grid);
+        this.add(new BishopWhite(Cell.C1), grid);
+        this.add(new QeenWhite(Cell.D1), grid);
+        this.add(new KingWhite(Cell.E1), grid);
+        this.add(new BishopWhite(Cell.F1), grid);
+        this.add(new KnightWhite(Cell.G1), grid);
+        this.add(new RookWhite(Cell.H1), grid);
     }
 
     public void add(Figure figure, Group grid) {
@@ -152,7 +164,16 @@ public class Puzzle extends Application {
         );
     }
 
-    private Cell extract(double graphX, double graphY) {
-        return new Cell((int) graphX / 40, (int) graphY / 40);
+    private Cell findBy(double graphX, double graphY) {
+        Cell rst = Cell.A1;
+        int x = (int) graphX / 40;
+        int y = (int) graphY / 40;
+        for (Cell cell : Cell.values()) {
+            if (cell.x == x && cell.y == y) {
+                rst = cell;
+                break;
+            }
+        }
+        return rst;
     }
 }
