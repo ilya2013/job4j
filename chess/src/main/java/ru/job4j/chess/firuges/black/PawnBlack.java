@@ -3,7 +3,7 @@ package ru.job4j.chess.firuges.black;
 import ru.job4j.chess.firuges.BasicFigure;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
-import ru.job4j.chess.firuges.ImposibleMoveException;
+import ru.job4j.chess.ImpossibleMoveException;
 
 /**
  *
@@ -17,7 +17,7 @@ public class PawnBlack extends BasicFigure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         Cell[] steps = new Cell[0];
         if (source.y == dest.y + 1 && source.x == dest.x) {
             steps = new Cell[] { dest };

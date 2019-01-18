@@ -1,7 +1,10 @@
 package ru.job4j.chess.firuges;
 
+import ru.job4j.chess.ImpossibleMoveException;
+
 public abstract class BasicFigure implements Figure {
     protected final Cell position;
+
     protected BasicFigure(Cell position) {
         this.position = position;
     }
@@ -11,8 +14,8 @@ public abstract class BasicFigure implements Figure {
         return position;
     }
     @Override
-    abstract public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException;
+    abstract public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
 
-    @Override
-    abstract public Figure copy(Cell dest);
+//    @Override
+//    abstract public Figure copy(Cell dest);
 }
