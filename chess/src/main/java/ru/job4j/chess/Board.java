@@ -13,22 +13,23 @@ public abstract class Board {
 
     protected boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
-        int index = this.findBy(source);
-        if (index == -1) {
-            throw new FigureNotFoundException();
-        }
-        Cell[] steps = this.figures[index].way(source, dest);
-        if (steps.length == 0 ) {
-            throw new ImpossibleMoveException();
-        }
-        for (Cell step : steps) {
-            if (this.findBy(step) != -1/* && !steps[steps.length - 1].equals(dest)*/) {
-                throw new OccupiedWayException();
+        if (!source.equals(dest)) {
+            int index = this.findBy(source);
+            if (index == -1) {
+                throw new FigureNotFoundException();
             }
+            Cell[] steps = this.figures[index].way(source, dest);
+            if (steps.length == 0) {
+                throw new ImpossibleMoveException();
+            }
+            for (Cell step : steps) {
+                if (this.findBy(step) != -1) {
+                    throw new OccupiedWayException();
+                }
+            }
+                rst = true;
+                this.figures[index] = this.figures[index].copy(dest);
         }
-
-        rst = true;
-        this.figures[index] = this.figures[index].copy(dest);
         return rst;
     }
 

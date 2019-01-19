@@ -24,60 +24,26 @@ public class BishopBlack extends BasicFigure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        int idx = 0;
-        Cell[] result = new Cell[10];
-        int positionX = source.x;
-        int positionY = source.y;
-
-        if (isDiagonal(source, dest)) {
-            int deltaX = 1;
-            int deltaY = 1;
-            deltaX = source.x > dest.x ? -1 * deltaX : deltaX;
-            deltaY = source.y > dest.y ? -1 * deltaY : deltaY;
-            do {
-                positionX += deltaX;
-                positionY += deltaY;
-                for (Cell cell : Cell.values()) {
-                    if ((cell.x == positionX) && (cell.y == positionY)) {
-                        result[idx] = cell;
-                        idx++;
-                        break;
-                    }
-                }
-            } while (!(positionX == dest.x && positionY == dest.y));
-
-//            System.out.println(source.name());
-        } else {
+        int stepsCount = 0;
+        Cell[] result = new Cell[8];
+        if (!isDiagonal(source, dest)) {
             throw new ImpossibleMoveException();
+        } else {
+            int deltaX = source.x > dest.x ? -1  : 1;
+            int deltaY = source.y > dest.y ? -1  : 1;
+            for (int idx = 0; idx < Math.abs(dest.x - source.x); idx++ ) {
+                result [idx] = super.findBy(source.x + deltaX * (idx + 1), source.y  +deltaY * (idx +1));
+                stepsCount++;
+            }
         }
-
-        return Arrays.copyOf(result, idx);
+        return Arrays.copyOf(result, stepsCount);
     }
 
 
      protected boolean isDiagonal(Cell source, Cell dest) {
         boolean result = false;
-        if (isThisDiagonal(source, dest, 1, 1)
-                || isThisDiagonal(source, dest, 1, -1)
-                || isThisDiagonal(source, dest, -1, -1)
-                || isThisDiagonal(source, dest, -1, 1)) {
+        if (Math.abs(dest.x - source.x) == Math.abs(dest.y - source.y)) {
             result = true;
-        }
-        return result;
-    }
-    private boolean isThisDiagonal(Cell source, Cell dest, int deltaX, int deltaY) {
-        int sourceX = source.x;
-        int sourceY = source.y;
-        int destX = dest.x;
-        int destY = dest.y;
-        int size = 8;
-        boolean result = false;
-        for (int i = 0; i < size; i++) {
-            sourceX += deltaX;
-            sourceY += deltaY;
-            if (destX == sourceX && destY == sourceY) {
-                result = true;
-            }
         }
         return result;
     }

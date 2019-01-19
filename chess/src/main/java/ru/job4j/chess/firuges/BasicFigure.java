@@ -16,6 +16,14 @@ public abstract class BasicFigure implements Figure {
     @Override
     abstract public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
 
-//    @Override
-//    abstract public Figure copy(Cell dest);
+    protected Cell findBy(double cellX, double cellY) {
+        Cell rst = Cell.A1;
+        for (Cell cell : Cell.values()) {
+            if ((cell.x ==cellX) && (cell.y == cellY)) {
+                rst = cell;
+                break;
+            }
+        }
+        return rst;
+    }
 }

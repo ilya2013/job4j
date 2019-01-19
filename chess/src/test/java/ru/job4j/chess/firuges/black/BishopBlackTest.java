@@ -74,6 +74,28 @@ public class BishopBlackTest {
         assertThat(result, is(expected));
     }
 
+    @Test
+    public void whenWayFromB3ToA2ThenA3() throws ImpossibleMoveException {
+        Cell source = Cell.B2;
+        Cell dest = Cell.A3;
+        BishopBlack bishopBlack = new BishopBlack(source);
+        Cell[] expected = new Cell[1];
+        expected[0] = Cell.A3;
+        Cell[] result = bishopBlack.way(source, dest);
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenWayFromB3ToB3ThenA3() throws ImpossibleMoveException {
+        Cell source = Cell.B3;
+        Cell dest = Cell.B3;
+        BishopBlack bishopBlack = new BishopBlack(source);
+        Cell[] expected = new Cell[0];
+        //expected[0] = Cell.B3;
+        Cell[] result = bishopBlack.way(source, dest);
+        assertThat(result, is(expected));
+    }
+
     @Test (expected = ImpossibleMoveException.class)
     public void whenImpossibleMoveSoThenImpossibleMoveException() throws ImpossibleMoveException {
         Cell source = Cell.B2;
@@ -82,4 +104,14 @@ public class BishopBlackTest {
         bishopBlack.way(source, dest);
 
     }
+
+//    @Rule
+//    public ExpectedException exceptionRule = ExpectedException.none();
+//
+//    @Test
+//    public void whenExceptionThrown_thenRuleIsApplied() {
+//        exceptionRule.expect(NumberFormatException.class);
+//        exceptionRule.expectMessage("For input string");
+//        Integer.parseInt("1a");
+//    }
 }

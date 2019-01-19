@@ -9,7 +9,7 @@ import ru.job4j.chess.firuges.Cell;
  * @version $Id$
  * @since 0.1
  */
-public class Logic extends Board{
+public class Logic extends Board {
 
     @Override
     public boolean move(Cell source, Cell dest) {
@@ -21,7 +21,7 @@ public class Logic extends Board{
         } catch (OccupiedWayException e) {
             System.out.println("Фигура на пути.");
         } catch (ImpossibleMoveException e) {
-            System.out.format("Фигура не может так ходить.%s",System.lineSeparator());
+            System.out.format("Фигура не может так ходить.%s", System.lineSeparator());
         }
         return rst;
     }
