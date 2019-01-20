@@ -31,8 +31,8 @@ public class BishopBlack extends BasicFigure {
         } else {
             int deltaX = source.x > dest.x ? -1  : 1;
             int deltaY = source.y > dest.y ? -1  : 1;
-            for (int idx = 0; idx < Math.abs(dest.x - source.x); idx++ ) {
-                result [idx] = super.findBy(source.x + deltaX * (idx + 1), source.y  +deltaY * (idx +1));
+            for (int idx = 0; idx < Math.abs(dest.x - source.x); idx++) {
+                result [idx] = super.findBy(source.x + deltaX * (idx + 1), source.y  + deltaY * (idx + 1));
                 stepsCount++;
             }
         }

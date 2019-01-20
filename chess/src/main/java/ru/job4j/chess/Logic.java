@@ -1,6 +1,7 @@
 package ru.job4j.chess;
 
 import ru.job4j.chess.firuges.Cell;
+import ru.job4j.chess.firuges.Figure;
 
 /**
  * //TODO add comments.
@@ -9,19 +10,50 @@ import ru.job4j.chess.firuges.Cell;
  * @version $Id$
  * @since 0.1
  */
-public class Logic extends Board {
+public class Logic {
+    protected final Figure[] figures = new Figure[32];
+    private int index = 0;
 
-    @Override
-    public boolean move(Cell source, Cell dest) {
+    protected void add(Figure figure) {
+        this.figures[this.index++] = figure;
+    }
+
+    protected boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
-        try {
-            rst = super.move(source, dest);
-        } catch (FigureNotFoundException e) {
-            System.out.println("Фигура не найдена.");
-        } catch (OccupiedWayException e) {
-            System.out.println("Фигура на пути.");
-        } catch (ImpossibleMoveException e) {
-            System.out.format("Фигура не может так ходить.%s", System.lineSeparator());
+        if (!source.equals(dest)) {
+            int index = this.findBy(source);
+            if (index == -1) {
+                throw new FigureNotFoundException();
+            }
+            Cell[] steps = this.figures[index].way(source, dest);
+            if (steps.length == 0) {
+                throw new ImpossibleMoveException();
+            }
+            for (Cell step : steps) {
+                if ((this.findBy(step) != -1) && !(this.figures[index].getClass().getSimpleName().equals("KnightBlack") && !step.equals(dest))) {
+                    throw new OccupiedWayException();
+                }
+            }
+            rst = true;
+            this.figures[index] = this.figures[index].copy(dest);
+        }
+        return rst;
+    }
+
+    protected void clean() {
+        for (int position = 0; position != this.figures.length; position++) {
+            this.figures[position] = null;
+        }
+        this.index = 0;
+    }
+
+    protected int findBy(Cell cell) {
+        int rst = -1;
+        for (int index = 0; index != this.figures.length; index++) {
+            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
+                rst = index;
+                break;
+            }
         }
         return rst;
     }
