@@ -1,5 +1,6 @@
 package ru.job4j.chess.firuges.black;
 
+import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.BasicFigure;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
@@ -18,7 +19,7 @@ public class KnightBlack extends BasicFigure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         int stepsCount = 0;
         Cell[] result;
         if (isG(source, dest)) {
@@ -36,7 +37,7 @@ public class KnightBlack extends BasicFigure {
             }
 
         } else {
-            result = new Cell[0];
+            throw new ImpossibleMoveException();
         }
         return result;
     }

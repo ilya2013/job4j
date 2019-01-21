@@ -1,6 +1,7 @@
 package ru.job4j.chess.firuges.black;
 
 import org.junit.Test;
+import ru.job4j.chess.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 
 import static org.hamcrest.core.Is.is;
@@ -49,7 +50,7 @@ public class KnightBlackTest {
     }
 
     @Test
-    public void whenFromC3ToA4ThenB3A3A4() {
+    public void whenFromC3ToA4ThenB3A3A4() throws ImpossibleMoveException {
         Cell source = Cell.C3;
         Cell dest = Cell.A4;
         KnightBlack knightBlack = new KnightBlack(source);

@@ -5,6 +5,7 @@ import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.black.BishopBlack;
 import ru.job4j.chess.firuges.black.KnightBlack;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class LogicTest {
@@ -36,6 +37,17 @@ public class LogicTest {
         logic.add(bishopBlack);
         logic.add(knightBlack);
         logic.move(Cell.D7, Cell.A6);
+    }
+
+    @Test
+    public void whenKnightFromC3ToE2ThenTrue() throws OccupiedWayException, ImpossibleMoveException, FigureNotFoundException {
+        Logic logic = new Logic();
+        Cell source = Cell.C3;
+        Cell dest = Cell.E2;
+        logic.add(new KnightBlack(source));
+        boolean expected = true;
+        boolean result = logic.move(source, dest);
+        assertThat(result, is(expected));
     }
 
 }
