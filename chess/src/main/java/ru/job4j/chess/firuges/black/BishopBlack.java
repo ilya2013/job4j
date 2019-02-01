@@ -26,15 +26,15 @@ public class BishopBlack extends BasicFigure {
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         int stepsCount = 0;
         Cell[] result = new Cell[8];
-        if (!isDiagonal(source, dest)) {
-            throw new ImpossibleMoveException();
-        } else {
+        if (isDiagonal(source, dest)) {
             int deltaX = source.x > dest.x ? -1  : 1;
             int deltaY = source.y > dest.y ? -1  : 1;
             for (int idx = 0; idx < Math.abs(dest.x - source.x); idx++) {
                 result [idx] = super.findBy(source.x + deltaX * (idx + 1), source.y  + deltaY * (idx + 1));
                 stepsCount++;
             }
+        } else {
+            throw new ImpossibleMoveException();
         }
         return Arrays.copyOf(result, stepsCount);
     }
