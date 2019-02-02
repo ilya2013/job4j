@@ -68,4 +68,14 @@ public class ControlTaskTest {
         int[] result = controlTask.merge(a, b);
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void merge7() {
+        int[] a = new int[]{};
+        int[] b = new int[]{3, 10, 12};
+        int[] expected = new int[] {3, 10, 12};
+        ControlTask controlTask = new ControlTask();
+        int[] result = controlTask.merge(a, b);
+        assertThat(result, is(expected));
+    }
 }
