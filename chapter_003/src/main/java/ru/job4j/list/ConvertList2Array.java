@@ -11,10 +11,6 @@ public class ConvertList2Array {
             array [idx / cells][idx % cells] =  element;
             idx++;
         }
-        while (idx < cells * rows) {
-            array [idx / cells][idx % cells] =  0;
-            idx++;
-        }
         return array;
     }
 }
