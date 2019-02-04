@@ -25,7 +25,9 @@ import java.util.Arrays;
                     value -= 1;
                 }
             }
-        } else result[0] = 0;
+        } else {
+            result[0] = 0;
+        }
         return result;
     }
 }

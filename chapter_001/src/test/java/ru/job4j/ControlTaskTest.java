@@ -32,7 +32,7 @@ public class ControlTaskTest {
     public void merge3() {
         int[] a = new int[]{9, 13};
         int[] b = new int[]{7, 10};
-        int[] expected = new int[] { 7, 9, 10, 13};
+        int[] expected = new int[]{7, 9, 10, 13};
         ControlTask controlTask = new ControlTask();
         int[] result = controlTask.merge(a, b);
         assertThat(result, is(expected));
