@@ -6,7 +6,8 @@ import java.util.Arrays;
     public int[] changes(int value, int price) {
         int position = -1;
         int[] result = new int[50];
-        if ((value -= price) >= 0) {
+        value -= price;
+        if ((value) >= 0) {
             while (value > 0) {
                 if (value >= 50) {
                     result[++position] = 50;

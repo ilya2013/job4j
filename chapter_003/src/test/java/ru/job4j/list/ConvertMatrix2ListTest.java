@@ -61,6 +61,6 @@ public class ConvertMatrix2ListTest {
         expect.add(5);
         expect.add(6);
         List<Integer> result = convertList.convert(list);
-        assertThat(result.toArray(), is(expect.toArray()));
+        assertThat(result, is(expect));
     }
 }

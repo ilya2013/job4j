@@ -20,7 +20,7 @@ public class PawnBlack extends BasicFigure {
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
         Cell[] steps = new Cell[0];
         if (source.y == dest.y + 1 && source.x == dest.x) {
-            steps = new Cell[] { dest };
+            steps = new Cell[] {dest};
         }
         return steps;
     }

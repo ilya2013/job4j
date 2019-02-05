@@ -19,7 +19,7 @@ public abstract class BasicFigure implements Figure {
     protected Cell findBy(int cellX, int cellY) {
         Cell rst = Cell.A1;
         for (Cell cell : Cell.values()) {
-            if ((cell.x ==cellX) && (cell.y == cellY)) {
+            if ((cell.x == cellX) && (cell.y == cellY)) {
                 rst = cell;
                 break;
             }
