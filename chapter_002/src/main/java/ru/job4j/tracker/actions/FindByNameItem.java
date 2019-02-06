@@ -5,6 +5,7 @@ import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FindByNameItem extends BaseAction {
 
@@ -16,7 +17,7 @@ public class FindByNameItem extends BaseAction {
     public void execute(Input input, Tracker tracker) {
         System.out.println("------------Поиск заявки по имени  --------------");
         String name = input.ask("Введите имя заявки: ");
-        ArrayList<Item> items = tracker.findByName(name);
+        List<Item> items = tracker.findByName(name);
         if (items.size() != 0) {
             for (Item item : items) {
                 System.out.format("Заявка: %S, описание: %s, создана: %d \n", item.getName(), item.getDesc(), item.getCreated());

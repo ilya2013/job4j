@@ -4,6 +4,7 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.junit.Assert.*;
@@ -37,8 +38,8 @@ public class TrackerTest {
 
     @Test
     public void when2ItemsWithTheSameNameThenFind2Item() {
-        ArrayList<Item> result;
-        ArrayList<Item> expected = new ArrayList<>();
+        List<Item> result;
+        List<Item> expected = new ArrayList<>();
         expected.add(new Item("test1", "testDescription", 123L));
         expected.add(new Item("test1", "testDescription2", 1234L));
         Tracker tracker = new Tracker();
@@ -53,9 +54,9 @@ public class TrackerTest {
 
     @Test
     public void whenTwoItemInTrackerThenAfterDeleteStayOne() {
-        ArrayList<Item> result;
+        List<Item> result;
         Tracker tracker = new Tracker();
-        ArrayList<Item> items = new ArrayList<>();
+        List<Item> items = new ArrayList<>();
         items.add(new Item("test1", "testDescription", 123L));
         items.add(new Item("test1", "testDescription2", 1234L));
         ArrayList<Item> expected = new ArrayList<Item>();
@@ -71,8 +72,8 @@ public class TrackerTest {
 
     @Test
     public void whenTwoItemInTrackerThenAfterDeleteStayOne2() {
-        ArrayList<Item> result;
-        ArrayList<Item> items = new ArrayList<Item>();
+        List<Item> result;
+        List<Item> items = new ArrayList<Item>();
         items.add(new Item("test1", "testDescription", 123L));
         items.add(new Item("test1", "testDescription2", 1234L));
         ArrayList<Item> expected = new ArrayList<Item>();
@@ -88,8 +89,8 @@ public class TrackerTest {
 
     @Test
     public void whenTenItemInTrackerThenAfterDeleteStayOne2() {
-        ArrayList<Item> result;
-        ArrayList<Item> items = new ArrayList<Item>();
+        List<Item> result;
+        List<Item> items = new ArrayList<Item>();
         items.add(new Item("test1", "testDescription", 123L));
         items.add(new Item("test1", "testDescription1", 123L));
         items.add(new Item("test1", "testDescription2", 123L));

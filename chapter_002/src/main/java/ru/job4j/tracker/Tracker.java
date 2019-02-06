@@ -2,12 +2,13 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * Обертка над массивом
  */
 public class Tracker {
-    private ArrayList<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
 
     public Tracker() {
     }
@@ -40,9 +41,11 @@ public class Tracker {
      */
     public  boolean replace(String id, Item item) {
         boolean result = false;
+        int ind = -1;
         for (Item element : items) {
-            if (element.getId().equals(id)) {
-                items.set(items.indexOf(element), item);
+            ++ind;
+            if (item.getId().equals(id)) {
+                items.set(ind, item);
                 result = true;
                 break;
             }
@@ -70,7 +73,7 @@ public class Tracker {
      * Вернуть все записи
      * @return записи
      */
-    public ArrayList<Item> findAll() {
+    public List<Item> findAll() {
         return items;
     }
 
@@ -78,8 +81,8 @@ public class Tracker {
      * Поиск по имени
      * @param key имя записи
      */
-    public  ArrayList<Item> findByName(String key) {
-        ArrayList<Item> result = new ArrayList<>();
+    public  List<Item> findByName(String key) {
+        List<Item> result = new ArrayList<>();
         for (Item item : items) {
             if (item.getName() == key) {
                 result.add(item);
