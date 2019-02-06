@@ -1,20 +1,15 @@
 package ru.job4j.tracker;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
  * Обертка над массивом
  */
 public class Tracker {
-    private  int limit = 10;
-    private Item[] items = new Item[limit];
-    private int position = -1;
+    private ArrayList<Item> items = new ArrayList<>();
 
     public Tracker() {
-    }
-
-    public Tracker(int limit) {
-        this.limit = limit;
     }
 
     /**
@@ -33,12 +28,8 @@ public class Tracker {
      */
     public  Item add(Item item) {
         item.setId(generateId());
-        if (position < limit - 1) {
-            position++;
-            items[position] = item;
-        } else {
-            System.out.println("Превышен лимит");
-        }
+        items.add(item);
+
         return item;
     }
 
@@ -49,9 +40,9 @@ public class Tracker {
      */
     public  boolean replace(String id, Item item) {
         boolean result = false;
-        for (int i = 0; i <= position; i++) {
-            if (items[i].getId().equals(id)) {
-                items[i] = item;
+        for (Item element : items) {
+            if (element.getId().equals(id)) {
+                items.set(items.indexOf(element), item);
                 result = true;
                 break;
             }
@@ -64,13 +55,11 @@ public class Tracker {
      */
     public  boolean delete(String id) {
         boolean result = false;
-        for (int pos = 0; pos <= position; pos++) {
-            if (items[pos] != null && items[pos].getId().equals(id)) {
-                if (pos != position) {
-                    System.arraycopy(items, pos + 1, items, pos, items.length - pos - 1);
-                }
-                this.position--;
-//                items = Arrays.copyOf(Arrays.copyOf(items, items.length - 1), items.length);
+        int ind = -1;
+        for (Item item : items) {
+            ++ind;
+            if (item.getId().equals(id)) {
+              items.remove(ind);
                 result = true;
                 break;
             }
@@ -81,33 +70,31 @@ public class Tracker {
      * Вернуть все записи
      * @return записи
      */
-    public Item[] findAll() {
-        return Arrays.copyOf(items, position + 1);
+    public ArrayList<Item> findAll() {
+        return items;
     }
 
     /**
      * Поиск по имени
      * @param key имя записи
      */
-    public  Item[] findByName(String key) {
-        int idx = 0;
-        Item[] result = new Item[limit];
-        for (int pos = 0; pos <= position; pos++) {
-            if (items[pos] != null && items[pos].getName().equals(key)) {
-                result[idx] = items[pos];
-                idx++;
+    public  ArrayList<Item> findByName(String key) {
+        ArrayList<Item> result = new ArrayList<>();
+        for (Item item : items) {
+            if (item.getName() == key) {
+                result.add(item);
             }
         }
-        return Arrays.copyOf(result, idx);
+        return result;
     }
     /**
      * Поиск по id
      * @param id уникальный идентификатор
      */
     public Item findById(String id) {
-        Item result = null;
-        for (Item item : this.items) {
-            if (item != null && item.getId().equals(id)) {
+        Item result = new Item();
+        for (Item item : items) {
+            if (item.getId() == id) {
                 result = item;
                 break;
             }
