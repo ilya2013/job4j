@@ -12,16 +12,8 @@ public class ListCompare implements Comparator<String> {
         for (int i = 0; i < min; i++) {
             char c1 = left.charAt(i);
             char c2 = right.charAt(i);
-            if (c1 != c2) {
-                c1 = Character.toUpperCase(c1);
-                c2 = Character.toUpperCase(c2);
-                if (c1 != c2) {
-                    c1 = Character.toLowerCase(c1);
-                    c2 = Character.toLowerCase(c2);
-                    if (c1 != c2) {
+            if (Character.compare(c1, c2) != 0) {
                         return Integer.compare(c1, c2);
-                    }
-                }
             }
         }
         return Integer.compare(n1, n2);
