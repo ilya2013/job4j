@@ -1,5 +1,6 @@
 package ru.job4j.bank;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -16,15 +17,26 @@ public class Bank {
         clients.remove(user);
     }
 
+    private User getUserByPassport (String passport) {
+        User result = new User();
+        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
+            if (client.getKey().getPassport().equals(passport)) {
+                result = client.getKey();
+                break;
+            }
+        }
+        return result;
+    }
+
     /**
      * Добавление нового счёта пользователю, с проверкой на наличие у пользователю счёта.
      * @param passport Номер, серия паспорта
      * @param account Счёт для добавления
      */
     public void addAccountToUser(String passport, Account account) {
-        User searchUser = new User("1", passport);
-        if (!clients.get(searchUser).contains(account)) {
-            clients.get(searchUser).add(account);
+        User user = getUserByPassport(passport);
+        if (user.getPassport() != null && account != null && !clients.get(user).contains(account)) {
+            clients.get(user).add(account);
         }
     }
 
@@ -34,50 +46,48 @@ public class Bank {
      * @param account счёт на удаление
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        User searchUser = new User("1", passport);
-        clients.get(searchUser).remove(account);
+        clients.get(getUserByPassport(passport)).remove(account);
     }
 
     public List<Account> getUserAccounts(String passport) {
-        List<Account> result;
-        try {
-            result = clients.get(new User("1", passport));
-            result.size();
-        } catch (Exception e) {
+        List<Account> result = clients.get(getUserByPassport(passport));
+        if (result == null) {
             result = new ArrayList<>();
         }
         return result;
     }
 
-    private Account getActualAccount(User user, String req) {
-        Account result;
-        List<Account> list = this.clients.get(user);
-        try {
-            result = list.get(list.indexOf(new Account(0d, req)));
-        } catch (NullPointerException | ArrayIndexOutOfBoundsException e) {
-            result = null;
+    private Account getAccountByReq(String req) {
+        Account result = new Account();
+        for (Map.Entry<User, List<Account>> client: clients.entrySet()) {
+            List<Account> clientAccounts = client.getValue();
+            if (clientAccounts != null) {
+                for (Account account : clientAccounts) {
+                    if (account.getRequisites().equals(req)) {
+                        result = account;
+                        break;
+                    }
+                }
+            }
+            if (result.getRequisites() != null) {
+                break;
+            }
         }
         return result;
     }
     /**
-     * Процедура перевода между счетами пользователей/пользователя. Происходит проверка принадлежности счета пользователю.
-     * @param srcPassport Паспорт отправителя.
+     * Процедура перевода между счетами пользователей/пользователя.
      * @param srcRequisite Реквизиты счета списания.
-     * @param destPassport Паспорт получателя.
      * @param dstRequisite Реквизиты счёта зачисления.
      * @param amount Сумма перевода.
      * @return
      */
-    public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
+    public boolean transferMoney(String srcRequisite, String dstRequisite, double amount) {
         boolean result = false;
-        User searchSrcUser = new User("1", srcPassport);
-        User searchDestUser = new User("2", destPassport);
-        if (this.clients.containsKey(searchSrcUser) && this.clients.containsKey(searchDestUser)) {
-            Account srcAccount = getActualAccount(searchSrcUser, srcRequisite);
-            Account dstAccount = getActualAccount(searchDestUser, dstRequisite);
-            if ((srcAccount != null) && (dstAccount != null)) {
-                result = srcAccount.transfer(dstAccount, amount);
-            }
+        Account srcAccount = getAccountByReq(srcRequisite);
+        Account dstAccount = getAccountByReq(dstRequisite);
+        if ((srcAccount != null) && (dstAccount != null)) {
+            result = srcAccount.transfer(dstAccount, amount);
         }
         return result;
     }

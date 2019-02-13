@@ -6,6 +6,9 @@ public class Account {
     private double value;
     private String requisites;
 
+    public Account() {
+
+    }
     public Account(double value, String requisites) {
         this.value = value;
         this.requisites = requisites;
@@ -35,11 +38,15 @@ public class Account {
 
     boolean transfer(Account destination, double amount) {
         boolean success = false;
-        if (amount > 0 && amount < this.value && destination != null) {
+        if (!this.equals(destination) && amount > 0 && amount < this.value && destination != null) {
             success = true;
             this.value -= amount;
             destination.value += amount;
         }
         return success;
+    }
+
+    public String getRequisites() {
+        return requisites;
     }
 }

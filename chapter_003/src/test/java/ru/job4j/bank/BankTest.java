@@ -87,7 +87,7 @@ public class BankTest {
         bank.addAccountToUser(user1.getPassport(), account1);
         bank.addAccountToUser(user2.getPassport(), account2);
         bank.addAccountToUser(user2.getPassport(), account3);
-        bank.transferMoney("9212 556877", "01", "9212 556878", "03", 35);
+        bank.transferMoney("01", "03", 35);
         List<Account> accounts = bank.getUserAccounts(user2.getPassport());
         if (accounts.size() > 0) {
             for (Account account : accounts) {
@@ -111,7 +111,7 @@ public class BankTest {
         bank.addAccountToUser(user1.getPassport(), account1);
         bank.addAccountToUser(user2.getPassport(), account2);
         bank.addAccountToUser(user2.getPassport(), account3);
-        bank.transferMoney("9212 556877", "02", "9212 556878", "03", 35);
+        bank.transferMoney("02", "03", 35);
         List<Account> accounts = bank.getUserAccounts(user2.getPassport());
         if (accounts.size() > 0) {
             for (Account account : accounts) {
