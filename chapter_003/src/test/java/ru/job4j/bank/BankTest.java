@@ -25,6 +25,23 @@ public class BankTest {
         assertThat(result, is(expected));
     }
 
+
+    @Test
+    public void deleteUnexistingUser() {
+        String result = "";
+        String expected = "";
+        Bank bank = new Bank();
+        bank.deleteUser(new User("Test", "1245 556231"));
+    }
+
+    @Test
+    public void addAccontToUnexitsingUser() {
+        String result = "";
+        String expected = "";
+        Bank bank = new Bank();
+        bank.addAccountToUser("1245 556231", new Account(0, "13"));
+    }
+
     @Test
     public void addTwoUsersAnd3AccountsThenGetSecondUserWith2Accounts() {
         String result = "";

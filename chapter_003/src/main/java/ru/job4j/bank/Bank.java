@@ -28,31 +28,46 @@ public class Bank {
         return result;
     }
 
+    private Map.Entry<User, List<Account>> getUserDataByPassport (String passport) {
+        Map.Entry<User, List<Account>> result = null;
+        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
+            if (client.getKey().getPassport().equals(passport)) {
+                result = client;
+                break;
+            }
+        }
+        return result;
+    }
+
     /**
      * Добавление нового счёта пользователю, с проверкой на наличие у пользователю счёта.
      * @param passport Номер, серия паспорта
      * @param account Счёт для добавления
      */
     public void addAccountToUser(String passport, Account account) {
-        User user = getUserByPassport(passport);
-        if (user.getPassport() != null && account != null && !clients.get(user).contains(account)) {
-            clients.get(user).add(account);
+        Map.Entry<User, List<Account>> entry = getUserDataByPassport(passport);
+        if (entry != null && account != null && !entry.getValue().contains(account)) {
+            clients.get(entry.getKey()).add(account);
         }
     }
 
     /**
-     * Удалени счетов пользователя.
+     * Удаление счета пользователя.
      * @param passport паспорт пользователя
      * @param account счёт на удаление
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        clients.get(getUserByPassport(passport)).remove(account);
+        clients.get(getUserDataByPassport(passport).getKey()).remove(account);
     }
 
     public List<Account> getUserAccounts(String passport) {
-        List<Account> result = clients.get(getUserByPassport(passport));
-        if (result == null) {
-            result = new ArrayList<>();
+        Map.Entry<User, List<Account>> entry = getUserDataByPassport(passport);
+        List<Account> result = new ArrayList<>();
+        if (entry != null) {
+             result = getUserDataByPassport(passport).getValue();
+            if (result == null) {
+                result = new ArrayList<>();
+            }
         }
         return result;
     }
