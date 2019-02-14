@@ -1,6 +1,5 @@
 package ru.job4j.bank;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -73,7 +72,7 @@ public class Bank {
     }
 
     private Account getAccountByReq(String req) {
-        Account result = new Account();
+        Account result = null;
         for (Map.Entry<User, List<Account>> client: clients.entrySet()) {
             List<Account> clientAccounts = client.getValue();
             if (clientAccounts != null) {
@@ -84,7 +83,7 @@ public class Bank {
                     }
                 }
             }
-            if (result.getRequisites() != null) {
+            if (result != null) {
                 break;
             }
         }
@@ -95,7 +94,7 @@ public class Bank {
      * @param srcRequisite Реквизиты счета списания.
      * @param dstRequisite Реквизиты счёта зачисления.
      * @param amount Сумма перевода.
-     * @return
+     * @return перевод успешен.
      */
     public boolean transferMoney(String srcRequisite, String dstRequisite, double amount) {
         boolean result = false;
