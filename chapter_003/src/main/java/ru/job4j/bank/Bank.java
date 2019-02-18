@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import  java.util.Set;
 
 public class Bank {
     private Map<User, List<Account>> clients = new HashMap<>();
@@ -16,7 +17,7 @@ public class Bank {
         clients.remove(user);
     }
 
-    private User getUserByPassport (String passport) {
+    private User getUserByPassport(String passport) {
         User result = new User();
         for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
             if (client.getKey().getPassport().equals(passport)) {
@@ -27,7 +28,7 @@ public class Bank {
         return result;
     }
 
-    private Map.Entry<User, List<Account>> getUserDataByPassport (String passport) {
+    private Map.Entry<User, List<Account>> getUserDataByPassport(String passport) {
         Map.Entry<User, List<Account>> result = null;
         for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
             if (client.getKey().getPassport().equals(passport)) {
