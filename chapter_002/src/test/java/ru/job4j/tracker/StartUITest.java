@@ -6,25 +6,22 @@ import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.function.Consumer;
 
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class StartUITest {
-    PrintStream stdout = System.out;
-    // Создаем буфур для хранения вывода.
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    //Заменяем стандартный вывод на вывод в пямять для тестирования.
-    @Before
-    public void loadOutput() {
-        System.setOut(new PrintStream(this.out));
-    }
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
+        private final PrintStream stdout = new PrintStream(out);
 
-    @After
-    public void backOutput() {
-        System.setOut(this.stdout);
-    }
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
 
     @Test
     public void whenAddOneItemThenShowsOneItem() {
@@ -33,7 +30,7 @@ public class StartUITest {
                 "1",
                 "6"}; //Выход из программы
         StubInput stubInput = new StubInput(steps);
-        StartUI startUI = new StartUI(new ValidateInput(stubInput), new Tracker());
+        StartUI startUI = new StartUI(new ValidateInput(stubInput), new Tracker(), output);
         startUI.init();
     }
 
@@ -48,7 +45,7 @@ public class StartUITest {
                 "1",
                 "6"}; //Выход из программы
         StubInput stubInput = new StubInput(steps);
-        StartUI startUI = new StartUI(stubInput, new Tracker());
+        StartUI startUI = new StartUI(stubInput, new Tracker(), output);
         startUI.init();
     }
 
@@ -63,7 +60,7 @@ public class StartUITest {
                 "1",
                 "6"}; //Выход из программы
         StubInput stubInput = new StubInput(steps);
-        StartUI startUI = new StartUI(stubInput, new Tracker());
+        StartUI startUI = new StartUI(stubInput, new Tracker(), output);
         startUI.init();
     }
 @Test
@@ -74,7 +71,7 @@ public void whenAddOneItemThenShowsOneItem2() {
     Tracker tracker = new Tracker();
     Item testItem = new Item("item1", "desc1", 1L);
     tracker.add(testItem);
-    StartUI startUI = new StartUI(stubInput, tracker);
+    StartUI startUI = new StartUI(stubInput, tracker, output);
     startUI.init();
     assertThat(
             new String(out.toByteArray()),

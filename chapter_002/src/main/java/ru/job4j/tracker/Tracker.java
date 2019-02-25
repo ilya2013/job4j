@@ -44,7 +44,8 @@ public class Tracker {
         int ind = -1;
         for (Item element : items) {
             ++ind;
-            if (item.getId().equals(id)) {
+            item.setCreated(element.getCreated());
+            if (element.getId().equals(id)) {
                 items.set(ind, item);
                 result = true;
                 break;
@@ -84,7 +85,7 @@ public class Tracker {
     public  List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
         for (Item item : items) {
-            if (item.getName() == key) {
+            if (item.getName().equals(key)) {
                 result.add(item);
             }
         }
@@ -95,14 +96,13 @@ public class Tracker {
      * @param id уникальный идентификатор
      */
     public Item findById(String id) {
-        Item result = new Item();
+        Item result = null;
         for (Item item : items) {
-            if (item.getId() == id) {
+            if (item.getId().equals(id)) {
                 result = item;
                 break;
             }
         }
         return result;
     }
-
 }

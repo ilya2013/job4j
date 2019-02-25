@@ -3,6 +3,7 @@ package ru.job4j.tracker;
 import ru.job4j.tracker.actions.*;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MenuTracker {
 
@@ -37,10 +38,16 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
      */
+
+    /**
+     * Вывод данных. Функциональное програмирование.
+     */
+    Consumer<String> output;
     private Tracker tracker;
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
+
     private Map<String, UserAction> actions = new HashMap<>();
     /**
      * Конструктор.
@@ -48,9 +55,10 @@ public class MenuTracker {
      * @param input   объект типа Input
      * @param tracker объект типа Tracker
      */
-    public MenuTracker(Input input, Tracker tracker) {
+    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
+        this.output = output;
         fillActions();
     }
 
@@ -100,7 +108,7 @@ public class MenuTracker {
     public void show() {
         for (UserAction action : this.actions.values()) {
             if (action != null) {
-                System.out.format("%s%s", action.info(), System.lineSeparator());
+                output.accept(String.format("%s%s", action.info(), System.lineSeparator()));
             }
         }
     }
