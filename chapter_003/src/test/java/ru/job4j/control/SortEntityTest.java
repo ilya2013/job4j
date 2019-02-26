@@ -3,9 +3,7 @@ package ru.job4j.control;
 import org.junit.Test;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
@@ -17,28 +15,28 @@ public class SortEntityTest {
     @Test
     public void whenSortDepsAsc() {
         List deps = Arrays.asList(
-                new Department("K1\\SK1"),
-                new Department("K1\\SK2"),
-                new Department("K1\\SK1\\SSK1"),
-                new Department("K1\\SK1\\SSK2"),
-                new Department("K2"),
-                new Department("K2\\SK1\\SSK1"),
-                new Department("K2\\SK1\\SSK2")
+                new Entity("K1\\SK1"),
+                new Entity("K1\\SK2"),
+                new Entity("K1\\SK1\\SSK1"),
+                new Entity("K1\\SK1\\SSK2"),
+                new Entity("K2"),
+                new Entity("K2\\SK1\\SSK1"),
+                new Entity("K2\\SK1\\SSK2")
         );
-        SortEntity sortDepartment = new SortEntity();
-        List result = sortDepartment.sortDepartmentsAsc(deps);
+        SortEntity sortAscDepartment = new SortEntity();
+        sortAscDepartment.addElements(deps);
         List expect = Arrays.asList(
-                new Department("K1"),
-                new Department("K1\\SK1"),
-                new Department("K1\\SK1\\SSK1"),
-                new Department("K1\\SK1\\SSK2"),
-                new Department("K1\\SK2"),
-                new Department("K2"),
-                new Department("K2\\SK1"),
-                new Department("K2\\SK1\\SSK1"),
-                new Department("K2\\SK1\\SSK2")
+                new Entity("K1"),
+                new Entity("K1\\SK1"),
+                new Entity("K1\\SK1\\SSK1"),
+                new Entity("K1\\SK1\\SSK2"),
+                new Entity("K1\\SK2"),
+                new Entity("K2"),
+                new Entity("K2\\SK1"),
+                new Entity("K2\\SK1\\SSK1"),
+                new Entity("K2\\SK1\\SSK2")
         );
-        assertThat(result, is(expect));
+        assertThat(sortAscDepartment.getEntity().toArray(), is(expect.toArray()));
     }
 
     /**
@@ -47,26 +45,27 @@ public class SortEntityTest {
     @Test
     public void whenSortDepsDesc() {
         List deps = Arrays.asList(
-                new Department("K1\\SK1"),
-                new Department("K1\\SK2"),
-                new Department("K1\\SK1\\SSK1"),
-                new Department("K1\\SK1\\SSK2"),
-                new Department("K2"),
-                new Department("K2\\SK1\\SSK1"),
-                new Department("K2\\SK1\\SSK2")
+                new Entity("K1\\SK1"),
+                new Entity("K1\\SK2"),
+                new Entity("K1\\SK1\\SSK1"),
+                new Entity("K1\\SK1\\SSK2"),
+                new Entity("K2"),
+                new Entity("K2\\SK1\\SSK1"),
+                new Entity("K2\\SK1\\SSK2")
         );
         SortEntity sortDepartment = new SortEntity();
-        List result = sortDepartment.sortDepartmentsDesc(deps);
+        sortDepartment.addElements(deps);
+        List result = sortDepartment.sortDepartmentsDesc();
         List expect = Arrays.asList(
-                new Department("K2"),
-                new Department("K2\\SK1"),
-                new Department("K2\\SK1\\SSK2"),
-                new Department("K2\\SK1\\SSK1"),
-                new Department("K1"),
-                new Department("K1\\SK2"),
-                new Department("K1\\SK1"),
-                new Department("K1\\SK1\\SSK2"),
-                new Department("K1\\SK1\\SSK1")
+                new Entity("K2"),
+                new Entity("K2\\SK1"),
+                new Entity("K2\\SK1\\SSK2"),
+                new Entity("K2\\SK1\\SSK1"),
+                new Entity("K1"),
+                new Entity("K1\\SK2"),
+                new Entity("K1\\SK1"),
+                new Entity("K1\\SK1\\SSK2"),
+                new Entity("K1\\SK1\\SSK1")
         );
         assertThat(result, is(expect));
     }

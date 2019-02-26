@@ -2,7 +2,7 @@ package ru.job4j.control;
 
 import java.util.Objects;
 
-public class Entity {
+public class Entity implements Comparable {
 
         /**
          * Имя.
@@ -46,4 +46,10 @@ public class Entity {
                     + '\''
                     + '}';
         }
-    }
+
+    @Override
+    public int compareTo(Object o) {
+        Entity second = (Entity) o;
+            return this.getName().compareTo(second.getName());
+       }
+}
