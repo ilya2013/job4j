@@ -11,12 +11,12 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class SchoolTest {
-    private List<Student> students = Arrays.asList(new Student(10)
-            , new Student(70)
-            , new Student(40)
-            , new Student(60)
-            , new Student(100)
-            , new Student(55)
+    private List<Student> students = Arrays.asList(new Student(10),
+             new Student(70),
+             new Student(40),
+             new Student(60),
+             new Student(100),
+             new Student(55)
     );
 
     @Test
