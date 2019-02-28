@@ -25,13 +25,9 @@ public class SortEntity {
                     int size = Math.min(o1.getName().length(), o2.getName().length());
                     String first = o1.getName().substring(0, size);
                     String second = o2.getName().substring(0, size);
-                    if (first.compareTo(second) == 0 && o1.getName().length() > o2.getName().length()) {
-                        result = 1;
-                    } else if (first.compareTo(second) == 0 && o1.getName().length() < o2.getName().length()) {
-                        result = -1;
-                    } else {
-                        result = o2.getName().compareTo(o1.getName());
-                    }
+                        result = first.compareTo(second) == 0 && o1.getName().length() > o2.getName().length()
+                                ? 1 : first.compareTo(second) == 0 &&  o1.getName().length() < o2.getName().length()
+                                ? -1 : o2.getName().compareTo(o1.getName());
                 }
                 return result;
             }

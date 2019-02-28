@@ -4,21 +4,23 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.StartUI;
 import ru.job4j.tracker.Tracker;
 
+import java.util.function.Consumer;
+
 public class DeleteItem extends BaseAction {
 
-    public DeleteItem(int key, String info) {
-        super(key, info);
+    public DeleteItem(int key, String info, Consumer<String> output) {
+        super(key, info, output);
     }
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("------------Удаление заявки --------------");
+        output.accept(String.format("%s%s", "------------Удаление заявки --------------", System.lineSeparator()));
         String id = input.ask("Введите ID заявки: ");
         if (tracker.delete(id)) {
-            System.out.println(" Заявка удалена: " + id + "-----------");
+            output.accept(String.format("%s%s", " Заявка удалена: " + id + "-----------", System.lineSeparator()));
         } else {
-            System.out.println(" Заявка с указанным ID не найдена");
+            output.accept(String.format("%s%s",  " Заявка с указанным ID не найдена", System.lineSeparator()));
         }
-        System.out.println("------------ Завершено удаление заявки-----------");
+        output.accept(String.format("%s%s", "------------ Завершено удаление заявки-----------", System.lineSeparator()));
     }
 }

@@ -75,13 +75,13 @@ public class MenuTracker {
      * Метод заполняет массив.
      */
     public void fillActions() {
-        this.actions.put(ADD, (new AddItem(Integer.valueOf(ADD), "Add item")));
-        this.actions.put(SHOWALL, (new FindAllItem(Integer.valueOf(SHOWALL), "Show all items")));
-        this.actions.put(EDIT, (new UpdateItem(Integer.valueOf(EDIT), "Edit item")));
-        this.actions.put(DELETE, (new DeleteItem(Integer.valueOf(DELETE), "Delete item")));
-        this.actions.put(FINDBYID, (new FindItemById(Integer.valueOf(FINDBYID), "Find item by Id")));
-        this.actions.put(FINDBYNAME, (new FindByNameItem(Integer.valueOf(FINDBYNAME), "Find items by name")));
-        this.actions.put("6", new ExitProgram(6, "Exit Program"));
+        this.actions.put(ADD, (new AddItem(Integer.valueOf(ADD), "Add item", output)));
+        this.actions.put(SHOWALL, (new FindAllItem(Integer.valueOf(SHOWALL), "Show all items", output)));
+        this.actions.put(EDIT, (new UpdateItem(Integer.valueOf(EDIT), "Edit item", output)));
+        this.actions.put(DELETE, (new DeleteItem(Integer.valueOf(DELETE), "Delete item", output)));
+        this.actions.put(FINDBYID, (new FindItemById(Integer.valueOf(FINDBYID), "Find item by Id", output)));
+        this.actions.put(FINDBYNAME, (new FindByNameItem(Integer.valueOf(FINDBYNAME), "Find items by name", output)));
+        this.actions.put("6", new ExitProgram(6, "Exit Program", output));
     }
 
     public int[] menuKeys() {

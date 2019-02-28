@@ -4,22 +4,24 @@ import ru.job4j.tracker.Input;
 import ru.job4j.tracker.Item;
 import ru.job4j.tracker.Tracker;
 
+import java.util.function.Consumer;
+
 public class FindItemById extends BaseAction {
 
-    public FindItemById(int key, String info) {
-        super(key, info);
+    public FindItemById(int key, String info, Consumer<String> output) {
+        super(key, info, output);
     }
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("------------Поиск заявки по id  --------------");
+        output.accept(String.format("%s%s", "------------Поиск заявки по id  --------------", System.lineSeparator()));
         String id = input.ask("Введите ID заявки: ");
         Item item = tracker.findById(id);
         if (item != null) {
-            System.out.format("Заявка: %S, описание: %s, создана: %d", item.getName(), item.getDesc(), item.getCreated());
+            output.accept(String.format("%s%s", String.format("Заявка: %S, описание: %s, создана: %d", item.getName(), item.getDesc(), item.getCreated()), System.lineSeparator()));
         } else {
-            System.out.println(" Заявка с указанным ID не найдена");
+            output.accept(String.format("%s%s", " Заявка с указанным ID не найдена", System.lineSeparator()));
         }
-        System.out.println("------------ Поиск заявки по id -----------");
+        output.accept(String.format("%s%s", "------------ Поиск заявки по id -----------", System.lineSeparator()));
     }
 }

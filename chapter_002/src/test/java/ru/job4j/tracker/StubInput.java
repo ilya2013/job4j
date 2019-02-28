@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.function.Consumer;
+
 public class StubInput implements Input {
     /**
      * Это поле содержит последовательность ответов пользователя.
@@ -11,6 +13,7 @@ public class StubInput implements Input {
      * y - выйти из трекера.
      */
     private final String[] value;
+    private  final Consumer<String> output;
 
     /**
      * Поле считает количество вызовом метода ask.
@@ -18,8 +21,9 @@ public class StubInput implements Input {
      */
     private int position;
 
-    public StubInput(final String[] value) {
+    public StubInput(final String[] value, Consumer<String> output) {
         this.value = value;
+        this.output = output;
     }
 
     /**
@@ -32,7 +36,7 @@ public class StubInput implements Input {
      */
     @Override
     public String ask(String question) {
-        System.out.println(question + " " + this.value[this.position]);
+        output.accept(String.format("%s%s", question + " " + this.value[this.position], System.lineSeparator()));
         return this.value[this.position++];
     }
 
@@ -42,7 +46,7 @@ public class StubInput implements Input {
         boolean exists = false;
         int currenPosition = this.position;
         this.position++;
-        System.out.println(question + " " + this.value[currenPosition]);
+        output.accept(String.format("%s%s", question + " " + this.value[currenPosition], System.lineSeparator()));
         for (int value : range) {
             if (Integer.valueOf(this.value[currenPosition]) == value) {
                 exists = true;

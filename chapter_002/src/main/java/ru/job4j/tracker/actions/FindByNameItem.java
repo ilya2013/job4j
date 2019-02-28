@@ -6,25 +6,26 @@ import ru.job4j.tracker.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
 
 public class FindByNameItem extends BaseAction {
 
-    public FindByNameItem(int key, String info) {
-        super(key, info);
+    public FindByNameItem(int key, String info, Consumer<String> output) {
+        super(key, info, output);
     }
 
     @Override
     public void execute(Input input, Tracker tracker) {
-        System.out.println("------------Поиск заявки по имени  --------------");
+        output.accept(String.format("%s%s", "------------Поиск заявки по имени  --------------", System.lineSeparator()));
         String name = input.ask("Введите имя заявки: ");
         List<Item> items = tracker.findByName(name);
         if (items.size() != 0) {
             for (Item item : items) {
-                System.out.format("Заявка: %S, описание: %s, создана: %d \n", item.getName(), item.getDesc(), item.getCreated());
+                output.accept(String.format("Заявка: %S, описание: %s, создана: %d %s", item.getName(), item.getDesc(), item.getCreated(), System.lineSeparator()));
             }
         } else {
-            System.out.println(" Заявка с указанным name не найдена");
+            output.accept(String.format("%s%s", " Заявка с указанным name не найдена", System.lineSeparator()));
         }
-        System.out.println("------------ Поиск заявки по имени завершён-----------");
+        output.accept(String.format("%s%s", "------------ Поиск заявки по имени завершён-----------", System.lineSeparator()));
     }
 }
