@@ -1,10 +1,8 @@
 package ru.job4j.bank;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import  java.util.Set;
+import java.util.*;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class Bank {
     private Map<User, List<Account>> clients = new HashMap<>();
@@ -30,13 +28,19 @@ public class Bank {
 
     private Map.Entry<User, List<Account>> getUserDataByPassport(String passport) {
         Map.Entry<User, List<Account>> result = null;
-        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
-            if (client.getKey().getPassport().equals(passport)) {
-                result = client;
-                break;
-            }
-        }
-        return result;
+        Optional<Map.Entry<User, List<Account>>> optional;
+//        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
+//            if (client.getKey().getPassport().equals(passport)) {
+//                result = client;
+//                break;
+//            }
+//        }
+
+        optional = clients.entrySet().stream()
+                .filter(entry -> entry.getKey().getPassport().equals(passport))
+                .findAny();
+//                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
+        return optional.isPresent() ? optional.get() : result;
     }
 
     /**
@@ -64,7 +68,7 @@ public class Bank {
         Map.Entry<User, List<Account>> entry = getUserDataByPassport(passport);
         List<Account> result = new ArrayList<>();
         if (entry != null) {
-             result = getUserDataByPassport(passport).getValue();
+            result = getUserDataByPassport(passport).getValue();
             if (result == null) {
                 result = new ArrayList<>();
             }
