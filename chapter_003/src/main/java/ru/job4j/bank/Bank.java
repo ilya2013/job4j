@@ -3,6 +3,7 @@ package ru.job4j.bank;
 import java.util.*;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Bank {
     private Map<User, List<Account>> clients = new HashMap<>();
@@ -17,29 +18,19 @@ public class Bank {
 
     private User getUserByPassport(String passport) {
         User result = new User();
-        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
-            if (client.getKey().getPassport().equals(passport)) {
-                result = client.getKey();
-                break;
-            }
-        }
-        return result;
+        Optional<User> optional;
+        optional = clients.keySet().stream()
+                .filter(e -> e.getPassport().equals(passport))
+                .findAny();
+        return optional.isPresent() ? optional.get() : result;
     }
 
     private Map.Entry<User, List<Account>> getUserDataByPassport(String passport) {
         Map.Entry<User, List<Account>> result = null;
         Optional<Map.Entry<User, List<Account>>> optional;
-//        for (Map.Entry<User, List<Account>> client : clients.entrySet()) {
-//            if (client.getKey().getPassport().equals(passport)) {
-//                result = client;
-//                break;
-//            }
-//        }
-
         optional = clients.entrySet().stream()
                 .filter(entry -> entry.getKey().getPassport().equals(passport))
                 .findAny();
-//                .collect(Collectors.toMap(p -> p.getKey(), p -> p.getValue()));
         return optional.isPresent() ? optional.get() : result;
     }
 
@@ -78,21 +69,12 @@ public class Bank {
 
     private Account getAccountByReq(String req) {
         Account result = null;
-        for (Map.Entry<User, List<Account>> client: clients.entrySet()) {
-            List<Account> clientAccounts = client.getValue();
-            if (clientAccounts != null) {
-                for (Account account : clientAccounts) {
-                    if (account.getRequisites().equals(req)) {
-                        result = account;
-                        break;
-                    }
-                }
-            }
-            if (result != null) {
-                break;
-            }
-        }
-        return result;
+        Optional<Account> optional;
+        optional = clients.values().stream()
+                .flatMap(List::stream)
+                .filter(e -> e.getRequisites().equals(req))
+                .findFirst();
+        return optional.isPresent() ? optional.get() : result;
     }
     /**
      * Процедура перевода между счетами пользователей/пользователя.
