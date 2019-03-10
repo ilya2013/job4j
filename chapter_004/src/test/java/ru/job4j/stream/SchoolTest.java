@@ -11,11 +11,11 @@ import static org.junit.Assert.*;
 
 public class SchoolTest {
     private List<Student> students = Arrays.asList(new Student("Костя",  10),
-             new Student("Федя",  70),
-             new Student("Иван", 40),
-             new Student("Саша", 60),
-             new Student("Таня", 100),
-             new Student("Петя", 55)
+            new Student("Федя",  70),
+            new Student("Иван", 40),
+            new Student("Саша", 60),
+            new Student("Таня", 100),
+            new Student("Петя", 55)
     );
 
     @Test
@@ -53,13 +53,8 @@ public class SchoolTest {
         Map<String, Student> result;
         School school = new School();
         result = school.collectToMap(students);
-        Map<String, Student> expected = new HashMap<>();
-        expected.put(students.get(0).getLastName(), students.get(0));
-        expected.put(students.get(1).getLastName(), students.get(1));
-        expected.put(students.get(2).getLastName(), students.get(2));
-        expected.put(students.get(3).getLastName(), students.get(3));
-        expected.put(students.get(4).getLastName(), students.get(4));
-        expected.put(students.get(5).getLastName(), students.get(5));
+        Map<String, Student> expected = Map.of(
+                students.get(0).getLastName(), students.get(0), students.get(1).getLastName(), students.get(1), students.get(2).getLastName(), students.get(2), students.get(3).getLastName(), students.get(3), students.get(4).getLastName(), students.get(4), students.get(5).getLastName(), students.get(5));
         assertThat(result, is(expected));
     }
 
@@ -68,7 +63,7 @@ public class SchoolTest {
         List<Student> result = null;
         School school = new School();
         result = school.levelOf(students, 60);
-        List expected = Arrays.asList(students.get(4), students.get(1), students.get(3));
+        List expected = List.of(students.get(4), students.get(1), students.get(3));
         assertThat(result, is(expected));
     }
 
