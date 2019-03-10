@@ -1,6 +1,6 @@
 package ru.job4j.stream;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String lastName = "Петя";
     private int score = 0;
 
@@ -23,5 +23,9 @@ public class Student {
 
     public String getLastName() {
         return lastName;
+    }
+
+    public int compareTo(Student o) {
+        return -1 * Integer.compare(this.score, o.score);
     }
 }

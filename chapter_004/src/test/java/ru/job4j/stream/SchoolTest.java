@@ -2,10 +2,7 @@ package ru.job4j.stream;
 
 import org.junit.Test;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.function.Predicate;
 
 import static org.junit.Assert.*;
@@ -63,6 +60,15 @@ public class SchoolTest {
         expected.put(students.get(3).getLastName(), students.get(3));
         expected.put(students.get(4).getLastName(), students.get(4));
         expected.put(students.get(5).getLastName(), students.get(5));
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void levelOf() {
+        List<Student> result = null;
+        School school = new School();
+        result = school.levelOf(students, 60);
+        List expected = Arrays.asList(students.get(4), students.get(1), students.get(3));
         assertThat(result, is(expected));
     }
 
