@@ -16,8 +16,8 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
-        for (Person person : this.persons) {
+        var result = new ArrayList<Person>();
+        for (var person : this.persons) {
                         if (person.getName().contains(key)
                                 || person.getSurname().contains(key)
                                 || person.getPhone().contains(key)
