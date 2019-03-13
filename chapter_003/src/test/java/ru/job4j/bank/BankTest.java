@@ -2,6 +2,7 @@ package ru.job4j.bank;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -144,6 +145,20 @@ public class BankTest {
         Bank bank = new Bank();
         bank.addUser(user1);
         bank.addAccountToUser("9212 556877", new Account());
-        bank.deleteAccountFromUser("9212 556878", new Account(50d, "01"));
+        bank.deleteAccountFromUser("9212 556878", new Account(50d, "01")); //Несуществующий клиент
+    }
+
+    @Test
+    public void deleteAccountFromUser() {
+        User user1 = new User("Иван", "9212 556877");
+        Account account1 = new Account(50d, "01");
+        Account account2 = new Account(250d, "02");
+        List<Account> expected = List.of(account2);
+        Bank bank = new Bank();
+        bank.addUser(user1);
+        bank.addAccountToUser("9212 556877", account1);
+        bank.addAccountToUser("9212 556877", account2);
+        bank.deleteAccountFromUser("9212 556877", new Account(50d, "01"));
+        assertThat(bank.getUserAccounts("9212 556877"), is(expected));
     }
 }
