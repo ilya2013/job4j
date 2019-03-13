@@ -52,11 +52,16 @@ public class Bank {
      * @param account счёт на удаление
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        List<Account> accountList = clients.get(getUserDataByPassport(passport).getKey());
-        if (accountList != null) {
+//        List<Account> accountList = clients.get(getUserByPassport(passport));
+//        if (accountList != null) {
+//            accountList.remove(account);
+//        }
+        Map.Entry<User, List<Account>> entry = getUserDataByPassport(passport);
+        if (entry != null  && account != null && entry.getValue() != null) {
+            List<Account> accountList = entry.getValue();
             accountList.remove(account);
+            this.clients.put(entry.getKey(), accountList);
         }
-
     }
 
     public List<Account> getUserAccounts(String passport) {

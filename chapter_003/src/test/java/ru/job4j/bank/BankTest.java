@@ -137,4 +137,13 @@ public class BankTest {
         }
         assertThat(result, is(expected));
     }
+
+    @Test
+    public void deleteAccountFromUserWhichNotExist() {
+        User user1 = new User("Иван", "9212 556877");
+        Bank bank = new Bank();
+        bank.addUser(user1);
+        bank.addAccountToUser("9212 556877", new Account());
+        bank.deleteAccountFromUser("9212 556878", new Account(50d, "01"));
+    }
 }
