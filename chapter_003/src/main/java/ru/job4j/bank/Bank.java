@@ -71,13 +71,12 @@ public class Bank {
     }
 
     private Account getAccountByReq(String req) {
-        Account result = null;
         Optional<Account> optional;
         optional = clients.values().stream()
                 .flatMap(List::stream)
                 .filter(e -> e.getRequisites().equals(req))
                 .findFirst();
-        return optional.isPresent() ? optional.get() : result;
+        return optional.orElse(null);
     }
     /**
      * Процедура перевода между счетами пользователей/пользователя.
