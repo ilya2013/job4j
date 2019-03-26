@@ -60,7 +60,7 @@ public class SimpleArrayTest {
 
     @Test
     public void when() throws TooManyElements {
-        SimpleArray<Integer> simpleArray = new SimpleArray<>(4) ;
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(4);
         List<Integer> result = new ArrayList<>();
         List<Integer> expected = List.of(11, 12);
         simpleArray.add(10);

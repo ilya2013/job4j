@@ -10,7 +10,7 @@ public class SimpleArray<T> implements Iterable<T> {
         this.array = new Object[size];
     }
 
-    public void add(T model) throws TooManyElements{
+    public void add(T model) throws TooManyElements {
         boolean result = false;
         for (int i = 0; i < array.length; i++) {
             if (array[i] == null) {
