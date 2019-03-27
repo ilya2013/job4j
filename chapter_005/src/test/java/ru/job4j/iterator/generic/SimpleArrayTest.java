@@ -60,13 +60,43 @@ public class SimpleArrayTest {
 
     @Test
     public void when() throws TooManyElements {
-        SimpleArray<Integer> simpleArray = new SimpleArray<>(4);
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
         List<Integer> result = new ArrayList<>();
         List<Integer> expected = List.of(11, 12);
         simpleArray.add(10);
         simpleArray.add(11);
         simpleArray.add(12);
         simpleArray.remove(0);
+        for (Integer e : simpleArray) {
+            result.add(e);
+        }
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenRemoveLastElement() throws TooManyElements {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
+        List<Integer> result = new ArrayList<>();
+        List<Integer> expected = List.of(10, 11);
+        simpleArray.add(10);
+        simpleArray.add(11);
+        simpleArray.add(12);
+        simpleArray.remove(2);
+        for (Integer e : simpleArray) {
+            result.add(e);
+        }
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenMiddleLastElement() throws TooManyElements {
+        SimpleArray<Integer> simpleArray = new SimpleArray<>(3);
+        List<Integer> result = new ArrayList<>();
+        List<Integer> expected = List.of(10, 12);
+        simpleArray.add(10);
+        simpleArray.add(11);
+        simpleArray.add(12);
+        simpleArray.remove(1);
         for (Integer e : simpleArray) {
             result.add(e);
         }

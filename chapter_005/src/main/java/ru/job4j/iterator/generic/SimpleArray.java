@@ -26,17 +26,23 @@ public class SimpleArray<T> implements Iterable<T> {
 
     public boolean set(int index, T model) {
         boolean result = false;
-            if (index < array.length && array[index] != null) {
-                array[index] = model;
-                result = true;
-            }
+        if (index < array.length && array[index] != null) {
+            array[index] = model;
+            result = true;
+        }
         return result;
     }
 
     public void remove(int index) {
-       if (index < array.length) {
-           System.arraycopy(array, index + 1, array, index, array.length - index - 1);
-       }
+//       if (index < array.length && array[index] != null) {
+//           System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+//       }
+        if (index < array.length && array[index] != null) {
+            for (int ind = index; ind < array.length; ind++) {
+                array[ind] = ind < array.length - 1 ? array[ind + 1] : null;
+            }
+        }
+
     }
 
     public <T> T get(int index) {
