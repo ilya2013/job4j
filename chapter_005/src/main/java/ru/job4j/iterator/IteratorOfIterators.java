@@ -2,6 +2,8 @@ package ru.job4j.iterator;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Optional;
+import java.util.stream.Stream;
 
 
 public class IteratorOfIterators {
@@ -10,8 +12,16 @@ public class IteratorOfIterators {
         return new Iterator<Integer>() {
             @Override
             public boolean hasNext() {
-                innerIterator = innerIterator == null || (!innerIterator.hasNext() && it.hasNext()) ? it.next() : innerIterator;
-                return innerIterator != null && innerIterator.hasNext();
+                boolean result = false;
+                    while (it.hasNext()) {
+                        if (innerIterator != null && innerIterator.hasNext()) {
+                            break;
+                        } else {
+                            innerIterator = it.next();
+                        }
+                    }
+                    result = innerIterator != null && innerIterator.hasNext();
+                return result;
             }
             @Override
             public Integer next() {
