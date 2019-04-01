@@ -6,47 +6,39 @@ import java.util.NoSuchElementException;
 
 public class SimpleArray<T> implements Iterable<T> {
     private final Object[] array;
+    private int position = -1;
     public SimpleArray(int size) {
         this.array = new Object[size];
     }
 
     public void add(T model) throws TooManyElements {
-        boolean result = false;
-        for (int i = 0; i < array.length; i++) {
-            if (array[i] == null) {
-                array[i] = model;
-                result = true;
-                break;
-            }
-        }
-        if (!result) {
+        if (position == this.array.length - 1) {
             throw new TooManyElements();
         }
+        array[++position] = model;
     }
+
 
     public boolean set(int index, T model) {
         boolean result = false;
-        if (index < array.length && array[index] != null) {
+        if (index >= 0 && index <= position) {
             array[index] = model;
             result = true;
         }
         return result;
     }
 
-    public void remove(int index) {
-//       if (index < array.length && array[index] != null) {
-//           System.arraycopy(array, index + 1, array, index, array.length - index - 1);
-//       }
-        if (index < array.length && array[index] != null) {
-            for (int ind = index; ind < array.length; ind++) {
-                array[ind] = ind < array.length - 1 ? array[ind + 1] : null;
-            }
+    public boolean remove(int index) {
+        boolean result = false;
+        if (index >= 0 && index <= position) {
+            System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+            position--;
         }
-
+        return result;
     }
 
     public <T> T get(int index) {
-        return index < array.length ? (T) array[index] : null;
+        return index >= 0 && index <= position ? (T) array[index] : null;
     }
 
     @Override
@@ -55,7 +47,7 @@ public class SimpleArray<T> implements Iterable<T> {
             int index = 0;
             @Override
             public boolean hasNext() {
-                return index < array.length && array[index] != null;
+                return index <= position  && array[index] != null;
             }
 
             @Override
