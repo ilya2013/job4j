@@ -20,12 +20,11 @@ public class MatrixIterator implements Iterator {
 
     @Override
     public Integer next() {
-        int result;
-        try {
-            result = matrix[rowId][colId];
-        } catch (Exception e) {
-            throw new NoSuchElementException();
-        }
+       int result = 0;
+       if (!hasNext()) {
+           throw new NoSuchElementException();
+       }
+       result = matrix[rowId][colId];
         if (colId == matrix[rowId].length - 1) {
             rowId++;
             colId = 0;
