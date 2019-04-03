@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
-public class UserStoreTest {
+public class AbstractStoreTest {
 
     @Test
     public void whenAddUserThenGetFindthatUser() throws TooManyElements {
@@ -14,10 +14,9 @@ public class UserStoreTest {
         userStore.add(new User("10"));
         userStore.add(new User("11"));
         String expected = "10";
-        User result = (User) userStore.findById("10");
+        User result = userStore.findById("10");
         assertThat(result.getId(), is(expected));
     }
-
     @Test
     public void whenAddRoleThenGetFindthatRole() throws TooManyElements {
         RoleStore roleStore = new RoleStore(4);
@@ -25,7 +24,7 @@ public class UserStoreTest {
         roleStore.add(new Role("10"));
         roleStore.add(new Role("11"));
         String expected = "10";
-        Role result = (Role) roleStore.findById("10");
+        Role result = roleStore.findById("10");
         assertThat(result.getId(), is(expected));
     }
 
@@ -48,6 +47,28 @@ public class UserStoreTest {
     @Test
     public void whenAddRoleThenGetF3indthatRole() throws TooManyElements {
         RoleStore roleStore = new RoleStore(4);
-        roleStore.add(new User("10"));
+        Role expected = null;
+        Role role1 = new Role("10");
+        Role role2 = null;
+        Role role3 = new Role("11");
+        roleStore.add(role1);
+        roleStore.add(role2);
+        roleStore.add(role3);
+        Role result = roleStore.findById("12");
+        assertThat(result, is(expected));
     }
+
+    @Test (expected = TooManyElements.class)
+    public void whenAddTooManyElements() throws TooManyElements {
+        RoleStore roleStore = new RoleStore(2);
+        Role expected = null;
+        Role role1 = null;
+        Role role2 = null;
+        Role role3 = null;
+        roleStore.add(role1);
+        roleStore.add(role2);
+        roleStore.delete(null);
+        roleStore.add(role3);
+    }
+
 }
