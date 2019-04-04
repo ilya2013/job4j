@@ -7,6 +7,7 @@ public class SimpleStack<T>  {
     public T poll() {
         T result = first != null ? first.date : null;
             this.first = this.first != null && this.first.next != null ? this.first.next : null;
+            this.size--;
         return result;
     }
 
