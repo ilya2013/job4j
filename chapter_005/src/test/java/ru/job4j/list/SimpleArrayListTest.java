@@ -2,6 +2,11 @@ package ru.job4j.list;
 
 import org.junit.Test;
 import org.junit.Before;
+
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -27,5 +32,26 @@ public class SimpleArrayListTest {
     @Test
     public void whenAddThreeElementsThenUseGetSizeResultThree() {
         assertThat(list.getSize(), is(3));
+    }
+
+    @Test (expected = ConcurrentModificationException.class)
+    public void whenWhileIterateAddElementThenGetConcurrentModificationException() {
+        Iterator<Integer> iterator = list.iterator();
+        iterator.next();
+        iterator.next();
+        list.add(4);
+        iterator.next();
+        iterator.next();
+        iterator.next();
+    }
+
+    @Test (expected = NoSuchElementException.class)
+    public void whenWhileIterateAddElementThenGetConcurrentModificationExceptin() {
+        Iterator<Integer> iterator = list.iterator();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
+        iterator.next();
     }
 }
