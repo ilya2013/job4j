@@ -23,11 +23,13 @@ public class SimpleArrayListTest {
     }
 
     @Test
-    public void whenAddThreeElementsThenUseGetOneResultTwo() {
-        Integer result = list.delete();
-        Integer expected = 3;
-        assertThat(result, is(expected));
+    public void whenAddThreeElementsThenUseGetOneResultOfDeletedElementOrNullIfEmpty() {
+        assertThat(list.delete(), is(3));
+        assertThat(list.delete(), is(2));
+        assertThat(list.delete(), is(1));
+        list.delete();
     }
+
 
     @Test
     public void whenAddThreeElementsThenUseGetSizeResultThree() {
