@@ -25,7 +25,7 @@ public class SimpleArrayListTest {
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
         Integer result = list.delete();
-        Integer expected = 2;
+        Integer expected = 3;
         assertThat(result, is(expected));
     }
 

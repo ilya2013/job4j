@@ -28,9 +28,10 @@ public class SimpleArrayList<E> implements Iterable<E> {
      * Реализовать метод удаления первого элемент в списке.
      */
     public E delete() {
+        E result = this.first.date;
         this.first = this.first.next;
         modCount++;
-        return this.first.date;
+        return result;
     }
 
     /**
