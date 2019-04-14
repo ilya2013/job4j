@@ -49,6 +49,22 @@ public class SimpleArrayList<E> implements Iterable<E> {
         return result.date;
     }
 
+    protected void makeCircleForTest() {
+        first.next = first;
+    }
+    public boolean isClosed() {
+        boolean result = false;
+        Iterator<E> iterator = this.iterator();
+        for (int i = 0; iterator.hasNext(); i++) {
+            iterator.next();
+            if (i + 1 > this.size) {
+                result = true;
+                break;
+            }
+        }
+        return  result;
+    }
+
     /**
      * Метод получения размера коллекции.
      */
