@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
  */
 public class SimpleArrayList<E> implements Iterable<E> {
 
-    private int size;
+    private int size = 0;
     private Node<E> first;
     private volatile int modCount = 0;
 
@@ -25,13 +25,14 @@ public class SimpleArrayList<E> implements Iterable<E> {
     }
 
     /**
-     * Реализовать метод удаления первого элемент в списке.
+     * Метод удаления первого элемент в списке.
      */
     public E delete() {
         E result = null;
         if  (this.first != null) {
             result = this.first.date;
             this.first = this.first.next;
+            this.size--;
             modCount++;
         }
         return result;
