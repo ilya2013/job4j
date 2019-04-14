@@ -71,4 +71,28 @@ public class AbstractStoreTest {
         roleStore.add(role3);
     }
 
+    @Test
+    public void whenReplaceElement() throws TooManyElements {
+        RoleStore roleStore = new RoleStore(23);
+        Role expected = null;
+        Role role1 = new Role("10");
+        Role role2 = null;
+        Role role3 = new Role("11");
+        Role role4 = new Role("13");
+        roleStore.add(role1);
+        roleStore.add(role2);
+        roleStore.add(role3);
+        roleStore.replace("11", role4);
+        assertThat(roleStore.findById("13"), is(role4));
+    }
+    @Test
+    public void whenReplaceElementUnexistingElementThenFalse() throws TooManyElements {
+        RoleStore roleStore = new RoleStore(23);
+        boolean expected = false;
+        Role role1 = new Role("10");
+        Role role2 = new Role("13");
+        roleStore.add(role1);
+        assertThat(roleStore.replace("11", role2), is(expected));
+    }
+
 }

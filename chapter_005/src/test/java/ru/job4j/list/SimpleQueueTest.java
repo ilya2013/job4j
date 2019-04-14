@@ -15,27 +15,27 @@ import static org.junit.Assert.*;
 
 public class SimpleQueueTest {
     private SimpleQueue<Integer> queue;
-    @Test
-    public void whenPush123ThenPop123() {
-        queue = new SimpleQueue<>();
-        queue.push(1);
-        queue.push(2);
-        queue.push(3);
-        assertThat(queue.poll(), is(1));
-        assertThat(queue.poll(), is(2));
-        assertThat(queue.poll(), is(3));
-        queue.push(1);
-        queue.push(2);
-        queue.push(3);
-        assertThat(queue.poll(), is(1));
-        assertThat(queue.poll(), is(2));
-        assertThat(queue.poll(), is(3));
-        queue.push(1);
-        queue.push(2);
-        assertThat(queue.poll(), is(1));
-        assertThat(queue.poll(), is(2));
-        queue.push(3);
-        assertThat(queue.poll(), is(3));
-    }
+//    @Test
+//    public void whenPush123ThenPop123() {
+//        queue = new SimpleQueue<>();
+//        queue.push(1);
+//        queue.push(2);
+//        queue.push(3);
+//        assertThat(queue.poll(), is(1));
+//        assertThat(queue.poll(), is(2));
+//        assertThat(queue.poll(), is(3));
+//        queue.push(1);
+//        queue.push(2);
+//        queue.push(3);
+//        assertThat(queue.poll(), is(1));
+//        assertThat(queue.poll(), is(2));
+//        assertThat(queue.poll(), is(3));
+//        queue.push(1);
+//        queue.push(2);
+//        assertThat(queue.poll(), is(1));
+//        assertThat(queue.poll(), is(2));
+//        queue.push(3);
+//        assertThat(queue.poll(), is(3));
+//    }
 
 }

@@ -17,7 +17,7 @@ public class AbstractStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        return baseSimpleArray.set(baseSimpleArray.get(getIndexById(id)), model);
+        return baseSimpleArray.set(getIndexById(id), model);
     }
 
     @Override

@@ -6,14 +6,14 @@ public class SimpleQueue<T> {
     private SimpleStack<T> reversedSimpleStack = new SimpleStack<T>();
     private T result;
     public T poll() {
-        for (int i = 0; i < this.size; i++) {
-            reversedSimpleStack.push(simpleStack.poll());
-        }
-        size--;
-        result = reversedSimpleStack.poll();
-        for (int i = 0; i < this.size; i++) {
-            simpleStack.push(reversedSimpleStack.poll());
-        }
+//        for (int i = 0; i < this.size; i++) {
+//            reversedSimpleStack.push(simpleStack.poll());
+//        }
+//        size--;
+//        result = reversedSimpleStack.poll();
+//        for (int i = 0; i < this.size; i++) {
+//            simpleStack.push(reversedSimpleStack.poll());
+//        }
         return result;
     }
 
