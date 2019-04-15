@@ -32,6 +32,7 @@ public class SimpleArray<T> implements Iterable<T> {
         boolean result = false;
         if (index >= 0 && index <= position) {
             System.arraycopy(array, index + 1, array, index, array.length - index - 1);
+            result = true;
             position--;
         }
         return result;

@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class AbstractStoreTest {
 
     @Test
-    public void whenAddUserThenGetFindthatUser() throws TooManyElements {
+    public void whenAddUserThenGetFindthatUser() {
         UserStore userStore = new UserStore(4);
         userStore.add(new User("10"));
         userStore.add(new User("10"));
@@ -18,7 +18,7 @@ public class AbstractStoreTest {
         assertThat(result.getId(), is(expected));
     }
     @Test
-    public void whenAddRoleThenGetFindthatRole() throws TooManyElements {
+    public void whenAddRoleThenGetFindthatRole() {
         RoleStore roleStore = new RoleStore(4);
         roleStore.add(new Role("10"));
         roleStore.add(new Role("10"));
@@ -29,7 +29,7 @@ public class AbstractStoreTest {
     }
 
     @Test
-    public void when3AddRoleAfterDelete2ThenGetFindStayedRole() throws TooManyElements {
+    public void when3AddRoleAfterDelete2ThenGetFindStayedRole() {
         RoleStore roleStore = new RoleStore(4);
         Role role1 = new Role("10");
         Role role2 = new Role("10");
@@ -45,7 +45,7 @@ public class AbstractStoreTest {
     }
 
     @Test
-    public void whenAddRoleThenGetF3indthatRole() throws TooManyElements {
+    public void whenTryFindRoleWithUnexistingIdThenFalse() {
         RoleStore roleStore = new RoleStore(4);
         Role expected = null;
         Role role1 = new Role("10");
@@ -59,7 +59,7 @@ public class AbstractStoreTest {
     }
 
     @Test (expected = TooManyElements.class)
-    public void whenAddTooManyElements() throws TooManyElements {
+    public void whenAddTooManyElements() {
         RoleStore roleStore = new RoleStore(2);
         Role expected = null;
         Role role1 = null;
@@ -72,7 +72,7 @@ public class AbstractStoreTest {
     }
 
     @Test
-    public void whenReplaceElement() throws TooManyElements {
+    public void whenReplaceElementThenOnThePlaceOfOldOneWillBeNewOne() {
         RoleStore roleStore = new RoleStore(23);
         Role expected = null;
         Role role1 = new Role("10");
@@ -86,7 +86,7 @@ public class AbstractStoreTest {
         assertThat(roleStore.findById("13"), is(role4));
     }
     @Test
-    public void whenReplaceElementUnexistingElementThenFalse() throws TooManyElements {
+    public void whenReplaceUnexistingElementThenFalse() {
         RoleStore roleStore = new RoleStore(23);
         boolean expected = false;
         Role role1 = new Role("10");
@@ -95,4 +95,22 @@ public class AbstractStoreTest {
         assertThat(roleStore.replace("11", role2), is(expected));
     }
 
+
+    @Test
+    public void whenDeleteUnexistingElementThenFalse() {
+        RoleStore roleStore = new RoleStore(23);
+        boolean expected = false;
+        Role role1 = new Role("10");
+        roleStore.add(role1);
+        assertThat(roleStore.delete("11"), is(expected));
+    }
+
+    @Test
+    public void whenDeleteExistingElementThenTrue() {
+        RoleStore roleStore = new RoleStore(23);
+        boolean expected = true;
+        Role role1 = new Role("10");
+        roleStore.add(role1);
+        assertThat(roleStore.delete("10"), is(expected));
+    }
 }
