@@ -13,6 +13,7 @@ class Node<T> {
         Node hare = first;
 
         while (hare != null && hare.next != null) {
+            //System.out.printf("turtle: %s, hare: %s%s", turtle.value, hare.value, System.lineSeparator());
             turtle = turtle.next;
             hare = hare.next.next;
             if (turtle == hare) {

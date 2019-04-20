@@ -17,12 +17,24 @@ public class AbstractStore<T extends Base> implements Store<T> {
 
     @Override
     public boolean replace(String id, T model) {
-        return baseSimpleArray.set(getIndexById(id), model);
+        boolean res = false;
+        final int indexById = getIndexById(id);
+        if (indexById != -1) {
+            baseSimpleArray.set(indexById, model);
+            res = true;
+        }
+        return res;
     }
 
     @Override
     public boolean delete(String id) {
-        return baseSimpleArray.remove(getIndexById(id));
+        boolean res = false;
+        final int indexById = getIndexById(id);
+        if (indexById != -1) {
+            baseSimpleArray.remove(indexById);
+            res = true;
+        }
+        return res;
     }
 
     @Override
