@@ -3,6 +3,7 @@ package set;
 import ru.job4j.list.SimpleArrayList;
 
 import java.util.Iterator;
+import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
     private final SimpleArrayList<E> simpleList = new SimpleArrayList<E>();
@@ -12,15 +13,13 @@ public class SimpleSet<E> implements Iterable<E> {
         //E addelement = e;
         E element;
         boolean containsElement = false;
-//        while (iterator.hasNext()) {
-//            //element = (e.getClass()) iterator.next();//TODO задание на выполнение
-//            //System.out.println(element.getClass());
-//            System.out.println(e.getClass());
-////            if(e.equals(element)) {
-////                containsElement = true;
-////                break;
-////            };
-//        }
+        while (iterator.hasNext()) {
+            element = iterator.next();
+            if (Objects.equals(e, element)) {
+                containsElement = true;
+                break;
+            }
+        }
         if (!containsElement) {
             simpleList.add(e);
         }

@@ -1,5 +1,6 @@
 package ru.job4j.list;
 
+import java.lang.reflect.ParameterizedType;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -77,7 +78,7 @@ public class SimpleArrayList<E> implements Iterable<E> {
                     throw new NoSuchElementException();
                 }
                 currentNode = currentNode.next;
-                return (E) result;
+                return (E) result.date;
             }
         };
     }
@@ -99,5 +100,5 @@ public class SimpleArrayList<E> implements Iterable<E> {
         public String toString() {
             return date.toString();
         }
-    }
+        }
 }
