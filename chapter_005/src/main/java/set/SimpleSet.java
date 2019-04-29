@@ -1,28 +1,32 @@
 package set;
 
-import ru.job4j.list.SimpleArrayList;
-
+import ru.job4j.list.DynamicArrayContainer;
 import java.util.Iterator;
 import java.util.Objects;
 
 public class SimpleSet<E> implements Iterable<E> {
-    private final SimpleArrayList<E> simpleList = new SimpleArrayList<E>();
+    private final DynamicArrayContainer<E> simpleList = new DynamicArrayContainer<E>(10);
 
     void add(E e) {
         Iterator<E> iterator = simpleList.iterator();
-        //E addelement = e;
         E element;
-        boolean containsElement = false;
+        if (!containsElement(e)) {
+            simpleList.add(e);
+        }
+    }
+
+    private boolean containsElement(E e) {
+      boolean result = false;
+        Iterator<E> iterator = simpleList.iterator();
+        E element;
         while (iterator.hasNext()) {
             element = iterator.next();
             if (Objects.equals(e, element)) {
-                containsElement = true;
+                result = true;
                 break;
             }
         }
-        if (!containsElement) {
-            simpleList.add(e);
-        }
+        return result;
     }
 
     @Override
