@@ -19,23 +19,20 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
 
-    public boolean set(int index, T model) {
-        boolean result = false;
-        if (index >= 0 && index <= position) {
-            array[index] = model;
-            result = true;
+    public void set(int index, T model) {
+        if (index < 0 || index > position) {
+            throw new IndexOutOfBoundsException();
         }
-        return result;
+        array[index] = model;
     }
 
-    public boolean remove(int index) {
-        boolean result = false;
-        if (index >= 0 && index <= position) {
+    public void remove(int index) {
+        if (index < 0 || index > position) {
+            throw new IndexOutOfBoundsException();
+        }
             System.arraycopy(array, index + 1, array, index, array.length - index - 1);
             result = true;
             position--;
-        }
-        return result;
     }
 
     public <T> T get(int index) {
