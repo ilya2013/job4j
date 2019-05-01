@@ -10,4 +10,8 @@ public class SimpleStack<T>  {
     public void push(T value) {
         stack.add(value);
     };
+
+    public int size() {
+        return stack.getSize();
+    }
 }
