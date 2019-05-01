@@ -56,4 +56,14 @@ public class SimpleArrayListTest {
         iterator.next();
         iterator.next();
     }
+    @Test
+    public void whenIsNotClosedThenFalse() {
+        assertThat(list.isClosed(), is(false));
+    }
+
+    @Test
+    public void whenIsClosedThenTrue() {
+        list.makeCircleForTest();
+        assertThat(list.isClosed(), is(true));
+    }
 }
