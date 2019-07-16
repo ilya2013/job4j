@@ -51,6 +51,15 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
         }
         return rsl;
     }
+    @Override
+    public boolean isBinary() {
+        int count  = 0;
+        for (E elem : this) {
+            count++;
+        }
+        return count <= 2;
+    }
+
 
     @Override
     public Iterator<E> iterator() {

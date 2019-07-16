@@ -31,10 +31,7 @@ public class TreeTest {
     public void when6ElFindNotExitThenOptionEmpty() {
         Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
-        assertThat(
-                tree.findBy(7).isPresent(),
-                is(false)
-        );
+        assertThat(tree.findBy(7).isPresent(), is(false));
     }
 
     @Test
@@ -51,4 +48,24 @@ public class TreeTest {
         assertThat(iterator.hasNext(), is(false));
 
     }
+    @Test
+    public void when6ElementsThenIsBinaryFasle() {
+        Tree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
+        tree.add(4, 5);
+        tree.add(5, 6);
+        assertThat(tree.isBinary(), is(false)
+        );
+    }
+
+    @Test
+    public void when2ElementsThenIsBinaryTrue() {
+        Tree<Integer> tree = new SimpleTree<>(1);
+        tree.add(1, 2);
+        assertThat(tree.isBinary(), is(true)
+        );
+    }
+
 }
