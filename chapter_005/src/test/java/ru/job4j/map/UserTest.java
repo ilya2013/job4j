@@ -16,7 +16,7 @@ public class UserTest {
 @Test
     public void whenAddTwoSameEmentsThenGetMapWithTwoElements() {
     userMap.put(user1, "1");
-    userMap.put(user2, "1");
+    userMap.put(user2, "2");
     userMap.forEach((a, b) -> System.out.printf("Ключ: %s, значение: %s%s", a, b, System.lineSeparator()));
 
 }
