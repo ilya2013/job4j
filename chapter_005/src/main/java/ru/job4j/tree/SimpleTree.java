@@ -12,8 +12,9 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
 
     /**
      * Добавление дочернего элемента в дерево.
+     *
      * @param parent parent.
-     * @param child child.
+     * @param child  child.
      * @return
      */
     @Override
@@ -30,6 +31,7 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
 
     /**
      * Поиск Node по значению.
+     *
      * @param value
      * @return
      */
@@ -51,56 +53,63 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
         }
         return rsl;
     }
+
     @Override
     public boolean isBinary() {
-        int count  = 0;
+        int count = 0;
         for (E elem : this) {
             count++;
         }
-        return count <= 2;
+        return count <= 3;
     }
-
 
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            List<Node<E>> data = new ArrayList<>();
+            Queue<Node<E>> data = new LinkedList<>();
             int position = 0;
             int expectedModCount = modCount;
+            boolean needInit = true;
 
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (data.size() == 0) {
+                if (needInit) {
                     init();
+                    needInit = false;
                 }
-                return position < data.size();
+                return data.size() > 0;
             }
 
             @Override
             public E next() {
+                Node<E> node;
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return data.get(position++).getValue();
+                node = data.poll();
+                addLeaves(node);
+                return node.getValue();
             }
 
             /**
              * Инициализация итератора.
              */
             private void init() {
-                int position = -1;
                 if (root != null) {
                     data.add(root);
-                    ++position;
-                    while (position < data.size()) {
-                        for (Node<E> node : data.get(position).leaves()) {
-                            data.add(node);
-                        }
-                        ++position;
-                    }
+                }
+            }
+
+            /**
+             * Добавление дочерних элементов узла в очередь.
+             * @param node узел.
+             */
+            private void addLeaves(Node<E> node) {
+                for (Node<E> leave : node.leaves()) {
+                    data.add(leave);
                 }
             }
         };
