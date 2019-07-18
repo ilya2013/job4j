@@ -38,13 +38,17 @@ public class TreeTest {
     public void whenIteratorHasElement() {
         Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
-        Iterator<Integer> iterator = tree.iterator();
+        tree.add(1, 3);
+        tree.add(2, 4);
+        Iterator<Node<Integer>> iterator = tree.iterator();
         assertThat(iterator.hasNext(), is(true));
         assertThat(iterator.hasNext(), is(true));
         assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is(1));
+        assertThat(iterator.next().getValue(), is(1));
         assertThat(iterator.hasNext(), is(true));
-        assertThat(iterator.next(), is(2));
+        assertThat(iterator.next().getValue(), is(2));
+        assertThat(iterator.next().getValue(), is(3));
+        assertThat(iterator.next().getValue(), is(4));
         assertThat(iterator.hasNext(), is(false));
 
     }
@@ -52,10 +56,8 @@ public class TreeTest {
     public void when6ElementsThenIsBinaryFasle() {
         Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
-        tree.add(1, 3);
-        tree.add(1, 4);
-        tree.add(4, 5);
-        tree.add(5, 6);
+        tree.add(2, 3);
+        tree.add(2, 4);
         assertThat(tree.isBinary(), is(false)
         );
     }
@@ -64,6 +66,8 @@ public class TreeTest {
     public void when2ElementsThenIsBinaryTrue() {
         Tree<Integer> tree = new SimpleTree<>(1);
         tree.add(1, 2);
+        tree.add(1, 3);
+        tree.add(1, 4);
         assertThat(tree.isBinary(), is(true)
         );
     }

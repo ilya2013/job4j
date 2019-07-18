@@ -5,31 +5,36 @@ import java.util.*;
 public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
     private Node<E> root;
     transient private int modCount = 0;
+    private int size = 0;
 
     public SimpleTree(E root) {
         this.root = new Node<E>(root);
+        size++;
     }
 
     /**
      * Добавление дочернего элемента в дерево.
+     *
      * @param parent parent.
-     * @param child child.
+     * @param child  child.
      * @return
      */
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
         Optional<Node<E>> parentNode = findBy(parent);
-        if (parentNode.isPresent()) {
+        if (parentNode.isPresent() && !findBy(child).isPresent()) {
             parentNode.get().add(new Node<>(child));
             result = true;
             modCount++;
+            size++;
         }
         return result;
     }
 
     /**
      * Поиск Node по значению.
+     *
      * @param value
      * @return
      */
@@ -51,56 +56,64 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
         }
         return rsl;
     }
+
     @Override
     public boolean isBinary() {
-        int count  = 0;
-        for (E elem : this) {
-            count++;
-        }
-        return count <= 2;
+        Iterator<Node<E>> iterator = this.iterator();
+        Node<E> node;
+        boolean result = false;
+       if (iterator.hasNext()) {
+           result = iterator.next().leaves().size() >= 2;
+       }
+        return result;
     }
 
-
     @Override
-    public Iterator<E> iterator() {
-        return new Iterator<E>() {
-            List<Node<E>> data = new ArrayList<>();
-            int position = 0;
+    public Iterator<Node<E>> iterator() {
+        return new Iterator<>() {
+            Queue<Node<E>> data = new LinkedList<>();
             int expectedModCount = modCount;
+            boolean needInit = true;
 
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                if (data.size() == 0) {
+                if (needInit) {
                     init();
+                    needInit = false;
                 }
-                return position < data.size();
+                return data.size() > 0;
             }
 
             @Override
-            public E next() {
+            public Node<E> next() {
+                Node<E> node;
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return data.get(position++).getValue();
+                node = data.poll();
+                addLeaves(node);
+                return node;
             }
 
             /**
              * Инициализация итератора.
              */
             private void init() {
-                int position = -1;
                 if (root != null) {
                     data.add(root);
-                    ++position;
-                    while (position < data.size()) {
-                        for (Node<E> node : data.get(position).leaves()) {
-                            data.add(node);
-                        }
-                        ++position;
-                    }
+                }
+            }
+
+            /**
+             * Добавление дочерних элементов узла в очередь.
+             * @param node узел.
+             */
+            private void addLeaves(Node<E> node) {
+                for (Node<E> leave : node.leaves()) {
+                    data.add(leave);
                 }
             }
         };
