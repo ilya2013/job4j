@@ -59,7 +59,7 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
 
     @Override
     public boolean isBinary() {
-        Iterator<Node<E>> iterator = this.iterator();
+        Iterator<Node<E>> iterator = new NodeIterator();
         Node<E> node;
         boolean result = false;
        if (iterator.hasNext()) {
@@ -69,7 +69,7 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
     }
 
     @Override
-    public Iterator<Node<E>> iterator() {
+    public Iterator<E> iterator() {
         return new Iterator<>() {
             Queue<Node<E>> data = new LinkedList<>();
             int expectedModCount = modCount;
@@ -88,14 +88,14 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
             }
 
             @Override
-            public Node<E> next() {
+            public E next() {
                 Node<E> node;
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
                 node = data.poll();
                 addLeaves(node);
-                return node;
+                return node.getValue();
             }
 
             /**
@@ -117,5 +117,53 @@ public class SimpleTree<E extends Comparable<E>> implements Tree<E> {
                 }
             }
         };
+    }
+    private class NodeIterator implements Iterator<Node<E>> {
+
+        Queue<Node<E>> data = new LinkedList<>();
+        int expectedModCount = modCount;
+        boolean needInit = true;
+
+        @Override
+        public boolean hasNext() {
+            if (expectedModCount != modCount) {
+                throw new ConcurrentModificationException();
+            }
+            if (needInit) {
+                init();
+                needInit = false;
+            }
+            return data.size() > 0;
+        }
+
+        @Override
+        public Node<E> next() {
+            Node<E> node;
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+            node = data.poll();
+            addLeaves(node);
+            return node;
+        }
+
+        /**
+         * Инициализация итератора.
+         */
+        private void init() {
+            if (root != null) {
+                data.add(root);
+            }
+        }
+
+        /**
+         * Добавление дочерних элементов узла в очередь.
+         * @param node узел.
+         */
+        private void addLeaves(Node<E> node) {
+            for (Node<E> leave : node.leaves()) {
+                data.add(leave);
+            }
+        }
     }
 }
