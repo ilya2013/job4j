@@ -2,19 +2,19 @@ package ru.job4j.io;
 
 import org.junit.Test;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.*;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
 public class AnalizyTest {
     @Test
-    public void thenErrorStillExistThenOpenErrorTime() {
+    public void thenErrorStillExistThenOpenErrorTime() throws IOException {
         Analizy analizy = new Analizy();
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add("10:57:00;10:59:02");
@@ -26,16 +26,14 @@ public class AnalizyTest {
         analizy.unavailable(sourceFilePath, targetFilePath);
         try (BufferedReader read = new BufferedReader(new FileReader(targetFilePath))) {
             result = read.lines().collect(Collectors.toList());
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw ex;
         }
         assertThat(result, is(expectedReport));
     }
 
     @Test
-    public void thenAllErrorsCloasedThenClosedTime() {
+    public void thenAllErrorsClosedThenClosedTime() throws IOException {
         Analizy analizy = new Analizy();
         List<String> expectedReport = new ArrayList<>();
         expectedReport.add("10:57:00;10:59:02");
@@ -46,10 +44,8 @@ public class AnalizyTest {
         analizy.unavailable(sourceFilePath, targetFilePath);
         try (BufferedReader read = new BufferedReader(new FileReader(targetFilePath))) {
             result = read.lines().collect(Collectors.toList());
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw ex;
         }
         assertThat(result, is(expectedReport));
     }
