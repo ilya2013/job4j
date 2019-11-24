@@ -8,7 +8,6 @@ import java.util.Scanner;
 public class Client {
     private final Socket socket;
     private final Scanner console;
-    private int indx = 3;
     protected static final String STOP_KEY = "exit";
     protected static final String LS = System.getProperty("line.separator");
 
@@ -27,8 +26,8 @@ public class Client {
             do {
                 str = console.hasNext() ? console.next() : "";
                 out.println(str);
-                stop = str.equals(STOP_KEY);
-                for (String answer = in.readLine(); answer != null && answer.isEmpty() && !answer.equals(LS); answer = in.readLine()) {
+                stop = STOP_KEY.equals(str);
+                for (String answer = in.readLine(); answer != null && !answer.isEmpty(); answer = in.readLine()) {
                     System.out.println(answer);
                 }
             } while (!stop);
