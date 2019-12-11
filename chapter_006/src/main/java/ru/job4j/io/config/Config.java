@@ -1,11 +1,11 @@
-package ru.job4j.io.server;
+package ru.job4j.io.config;
 
 import java.io.Reader;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-interface Config {
+public interface Config {
     String get(String key);
     void init();
     void init(Reader reader);

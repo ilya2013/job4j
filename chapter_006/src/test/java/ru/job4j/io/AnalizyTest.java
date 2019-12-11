@@ -22,7 +22,7 @@ public class AnalizyTest {
         expectedReport.add("11:02:07");
         String sourceFilePath = "./data/Analizy/logWithOpenError.log";
         String targetFilePath = "./data/Analizy/reportWithOpenError.csv";
-        List<String> result = new ArrayList<>();
+        List<String> result;
         analizy.unavailable(sourceFilePath, targetFilePath);
         try (BufferedReader read = new BufferedReader(new FileReader(targetFilePath))) {
             result = read.lines().collect(Collectors.toList());

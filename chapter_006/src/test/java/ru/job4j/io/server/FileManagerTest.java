@@ -7,18 +7,19 @@ import ru.job4j.io.config.FileConfig;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
+import static org.hamcrest.Matchers.is;
 
-public class FileConfigTest {
+public class FileManagerTest {
 
     @Test
-    public void thenCorrectConfigFilePathThenPropertiesAddsFromFile() throws IOException {
+    public void currentDir() throws IOException {
         Config prop = new FileConfig();
+        String expected = "./data";
         File propFile = new File("./data/socket/test/config.properties");
         prop.init(new FileReader(propFile));
-        assertThat(prop.get("rootPath"), is("./data"));
-        prop.setProperty("test", "testv");
-        assertThat(prop.get("test"), is("testv"));
+        Explorer fileManager = new FileManager(prop);
+        assertThat(fileManager.currentDir().toString(), is(expected));
     }
+
 }

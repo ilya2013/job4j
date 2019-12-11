@@ -1,6 +1,7 @@
-package ru.job4j.io.server;
+package ru.job4j.io.config;
 
-import java.io.FileInputStream;
+import ru.job4j.io.config.Config;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Reader;
