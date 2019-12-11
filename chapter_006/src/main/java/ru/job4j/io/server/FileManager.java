@@ -6,7 +6,7 @@ import java.io.*;
 import java.util.Arrays;
 import java.util.List;
 
-public class FileManager implements Explorer{
+public class FileManager implements Explorer {
     final File rootPath;
     private File currentPath;
     static final String TO_PARENT = "..";
@@ -17,7 +17,8 @@ public class FileManager implements Explorer{
 }
     @Override
     public List<File> ls() {
-        return Arrays.asList(currentPath.listFiles());//TODO: Проверка на Null
+        //TODO Проверка на Null
+        return Arrays.asList(currentPath.listFiles());
     }
 
     @Override
@@ -28,7 +29,7 @@ public class FileManager implements Explorer{
     @Override
     public void cd(String path) throws Exception {
         File file = new File(path);
-        if(!file.exists() || file.isFile()) {
+        if (!file.exists() || file.isFile()) {
             throw new Exception(); //TODO Логика ошибок.
         }
         currentPath = TO_PARENT.equals(path) ? currentPath.getParentFile() : new File(path);
@@ -46,12 +47,11 @@ public class FileManager implements Explorer{
         if (!newFile.createNewFile()) {
             throw new IOException(); //TODO
         }
-        try(BufferedOutputStream fOut = new BufferedOutputStream(new FileOutputStream(newFile));
+        try (BufferedOutputStream fOut = new BufferedOutputStream(new FileOutputStream(newFile));
             BufferedInputStream in = new BufferedInputStream(inputStream)) {
             int count;
             byte[] buffer = new byte[8192];
-            while ((count = in.read(buffer)) > 0)
-            {
+            while ((count = in.read(buffer)) > 0) {
                 fOut.write(buffer, 0, count);
             }
         }
@@ -61,7 +61,7 @@ public class FileManager implements Explorer{
 
     @Override
     public BufferedOutputStream getFileStream(File file) throws Exception {
-        if(file == null || !file.isFile()) {
+        if (file == null || !file.isFile()) {
             throw new Exception();
         }
 

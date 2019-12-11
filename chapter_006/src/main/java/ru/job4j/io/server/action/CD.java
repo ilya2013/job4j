@@ -20,9 +20,9 @@ public class CD extends BaseAction {
     public void execute(InputStream in, OutputStream out, Explorer explorer, List<String> args) throws Exception {
         String fileName;
         PrintWriter pw = new PrintWriter(out);
-        if (args == null)  {
+        if (args == null) {
             throw new Exception();
-        } else if (args.size() != 2){
+        } else if (args.size() != 2) {
             throw new Exception();
         }
         try {

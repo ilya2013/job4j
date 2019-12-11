@@ -92,7 +92,7 @@ public class ActionsController implements Runnable {
                     command = args.get(0);
                     if (command.equals(STOP_COMMAND)) {
                         stop = true;
-                    } else if (actions.containsKey(command) ){
+                    } else if (actions.containsKey(command)) {
                         actions.get(command).execute(sIn, sOut, explorer, args);
                     } else if (HELP_COMMAND.equals(command)) {
                        actions.forEach(new BiConsumer<String, ClientAction>() {
